@@ -1,0 +1,45 @@
+---
+title: Using a Custom World Seed
+description: A custom level-seed allows you to play in the world you want.
+---
+
+## Introduction
+
+Sometimes we don't want a random seed, but a custom one. Once we find it, we can use it on a server, this will tell you how.
+
+## How to Set Custom Seed
+
+<Steps>
+    <Step>
+	**Log in** to our lagless game panel
+	</Step>
+    <Step>
+	Navigate to the **Files** tab and search for the **server.properties** file. 
+		<Callout type="warning">
+			Your server must be started at least once for this file to be generated.
+		</Callout>
+	</Step>
+    <Step>
+	Search for the field 
+	`level-seed=`
+	</Step>
+    <Step>
+	Insert a seed string of your choosing after the equals sign. For example:  
+	`level-seed=2231252140388046750`
+	</Step>
+	<Step>
+    Click **Save Content** of the file.
+	</Step>
+	<Step>
+    **Stop** the server completely.
+	</Step>
+	<Step>
+    Delete the existing world folder to make space for the new world
+		<Callout type="danger">
+			This will permanently erase all buildings, items, and player data from the current world. Make sure you have a backup if you wish to keep anything.
+        </Callout>
+	</Step>
+	<Step>
+    **Start** the server. Your new world should now be generated with the new seed.
+	</Step>
+</Steps>

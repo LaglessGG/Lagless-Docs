@@ -1,0 +1,51 @@
+---
+title: Importing a World
+description: Uploading a single player world to multiplayer for a better experience
+---
+
+# Zipping Software
+
+We recommend using <a href="https://www.7-zip.org/">7-Zip</a> for uploading. Other clients such as Win-Rar may suffice.
+
+# Zipping your World
+
+Select your world under Singleplayer and hit <b>Edit</b>
+
+![import-edit](/images/minecraft/import-edit.png)
+
+Next, you'll select on <b>Open World Folder</b>
+
+![import-open](/images/minecraft/import-open.png)
+
+From here, you'll see your world folder. Now, select everything and hit <b>Add to .zip</b>
+
+![zip-world](/images/minecraft/zip-world.png)
+
+Depending on your world size, it may take some time. Once it's complete, you'll see a new zip file in that same folder 
+containing your world.
+
+# Uploading to Lagless
+
+<Callout type="info" title="Before you start">
+    If you already have a world file, remember to delete it before uploading. If you are starting from scratch, you can skip this step.
+</Callout>
+
+We recommend using an SFTP client such as WinSCP or FileZilla. 
+
+To launch an SFTP session, go to <b>Files</b> and click on <b>Launch SFTP</b>.
+
+![launch-sftp](/images/minecraft/launch-sftp.png)
+
+Create a folder, we recommend naming it `world`. Remember if you choose to name it something else, you will need to change `world-name` in `server.properties`
+
+![create-folder](/images/minecraft/create-folder.png)
+
+Enter the folder you just created, then drag and drop your file over. Depending on your internet speed, this may take some time.
+
+# Unzipping
+
+Finally, go back to your File Manager and unzip the world.
+
+![unzip-world](/images/minecraft/unzip-world.png)
+
+You can delete the zipped folder uploaded previously. Now, you can start your server and play with friends.

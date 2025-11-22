@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    /* Teal primary */
+    --primary: 168 68% 32%; /* #1B8675 */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Light teal secondary */
+    --secondary: 168 68% 90%;
+    --secondary-foreground: 168 68% 20%;
+    
+    /* Muted teal */
+    --muted: 168 30% 94%;
+    --muted-foreground: 168 30% 30%;
+    
+    /* Teal-tinted accent */
+    --accent: 168 30% 94%;
+    --accent-foreground: 168 68% 20%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Teal-tinted borders and inputs */
+    --border: 168 20% 80%;
+    --input: 168 20% 80%;
+    --ring: 168 68% 32%;
+    
+    /* Chart colors with teal theme */
+    --chart-1: 168 80% 40%;
+    --chart-2: 178 70% 35%;
+    --chart-3: 158 65% 30%;
+    --chart-4: 168 75% 45%;
+    --chart-5: 188 65% 40%;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%; /* #09080a */
+    --foreground: 0 0% 99.6%; /* #fffefe */
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 99.6%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 99.6%;
+    
+    /* Teal primary */
+    --primary: 168 68% 32%; /* #1B8675 */
+    --primary-foreground: 0 0% 99.6%;
+    
+    /* Dark teal secondary */
+    --secondary: 168 68% 15%;
+    --secondary-foreground: 0 0% 99.6%;
+    
+    /* Muted teal */
+    --muted: 168 30% 15%;
+    --muted-foreground: 168 10% 60%;
+    
+    /* Teal-tinted accent */
+    --accent: 168 30% 15%;
+    --accent-foreground: 0 0% 99.6%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Teal-tinted borders and inputs */
+    --border: 168 20% 20%;
+    --input: 168 20% 20%;
+    --ring: 168 68% 32%;
+    
+    /* Dark mode chart colors with teal theme */
+    --chart-1: 168 80% 40%;
+    --chart-2: 178 70% 35%;
+    --chart-3: 158 65% 30%;
+    --chart-4: 168 75% 45%;
+    --chart-5: 188 65% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

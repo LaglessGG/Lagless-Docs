@@ -1,0 +1,117 @@
+---
+title: Backups
+description: Making backups easy with lagless. In this article we're going to explore multiple options.
+---
+
+## Automatic Backups.
+
+Did you forget to make a backup? No problem, we've got you covered. Lagless makes automatic backups daily.
+
+1. You can find these on the **backups** tab on the left. 
+2. From here look for a section named **Automatic Backups**. marked in red.
+
+![backup](/images/panel/backups/backup_automatic.png)
+
+### Manual backup.
+
+1. Select the tab **Backups** from the left side.
+2. Click the **Create Backup** button.
+
+![backup](/images/panel/backups/Backups.png)
+
+3. Name your backup, or leave it empty. In this example we named it my_fabulous_backup.
+4. Click **Start backup**
+
+![backup](/images/panel/backups/backup_create.png)
+
+Depending on the size of the backup, it may take a few minutes to complete.
+You now have a backup of all files.
+
+![backup](/images/panel/backups/backup_complete.png)
+
+## Scheduled backups.
+
+Scheduled backups can be ideal for when you want to plan for it, such as during the night when there are fewer players online. 
+Near the end you can find examples of time.
+
+1. To do so, head to the **settings** tab on the left.
+2. from here, look for the **Schedules** section.
+3. Press **Create Schedule**
+
+![backup](/images/panel/backups/backup_schedule.png)
+
+4. start by giving your schedule a name something that makes sense to you. For this example we're going to call it **My_scheduled_backup**
+<Callout title="Title" type="info">
+   You can enable the **Cheatsheet** if you need an example. The tool on this website may also help you [crontab](https://crontab.cronhub.io/)
+</Callout>
+5. Now we need to tell it when to do the backup. In the example below, it's set to every 12 hours. More about time settings below.
+
+![backup](/images/panel/backups/create_new_schedule.png)
+
+### Schedule time understanding
+
+Understanding what values to enter may seem daunting at first. So let's go over it.
+This table shows the possible values
+
+Time - possible values
+
+Minute - 0-59  
+Hour - 0-23  
+Day of The Month - 1 - 31  
+Month - 1-12  
+Day of week -  0 - 6, with 0 being Monday, 1 Tuesday etc..  
+
+* Using * Means every **Minute**, **hour**, **Day of month**, **Month**, **Day of week**. Which ever comes first.  
+* **/** Means every x hours. So if you were to do */5 in **Minute**, it would do the task every 5 minutes. Or */4 hour, it would do the task every 4 hours.  
+* **-** Means it runs at every **Minute**, **hour**, **Day of month**, **Month**, **Day of week** within the range set. For example "* 8-12 * * *"means we run our task at hour "8,9,10,11,12"  
+* **,** Means you run it at all values separated by a ",". So if you want to run a task every 15 minutes, you would use "* 15,30,45,0 * * *"  
+
+To give a complex example of all of this
+
+![backup](/images/panel/backups/complex_schedule.png)
+
+This task would run every 15 minutes, between 8:00 and 14:00, if it's day 19 of the month September, but **ONLY** if it's day 1 of the week, which is Monday. If all of these don't align, it will skip till the next year till it does, which isn't until 2033.
+
+### New Task
+
+Now that we have told when to run the schedule, we still need to tell it what to do.
+
+1. Click **New Task**
+
+![backup](/images/panel/backups/Task_new.png)
+
+2. Here we're going to select the action **Create backup**.
+
+3. Press **Create task**
+
+![backup](/images/panel/backups/task_select.png)
+
+## Filtering backup files
+
+If you don't want to include all files in a backup, there are 2 ways to do this. This method is inspired by .gitignore.
+
+### Manual filtering
+
+During the process of making a manual backup you can use this method.
+
+Typically you would use one of these options. But you can use multiple. Although it's not recommended.
+
+
+"world" - This will ignore any **file** or **folder** named **world**, anywhere  
+"world/" - This will ignore the **folder** named **world**, and anthing inside it  
+"world/*" - This will ignore everything in the world folder, the world folder will still be used, just left empty  
+
+
+![backup](/images/panel/backups/complex_schedule.png)
+
+In this example, I don't want any worlds backed up.
+
+![backup](/images/panel/backups/backup_with_filter.png)
+
+
+### Automatic filtering
+
+By placing a file named .pteroignore file in your main server directory, you can apply filters to backups made. These apply to all backups, unless stated otherwise.
+This works the same as any other text file with the filters mentioned before.
+
+![backup](/images/panel/backups/pteroignore.png)

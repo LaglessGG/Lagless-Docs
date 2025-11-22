@@ -1,0 +1,33 @@
+---
+title: Databases
+description: A method for storing data within your server that can be shared across multiple servers
+---
+
+# What are Databases?
+
+Databases are used to share data between multiple servers or sub-servers. For instance, you can create a database that allows you to share configurations 
+for Dynmap, LuckPerms, WorldGuard and more. At this time, we only support MySQL/MariaDB databases. 
+
+# Creating a Database
+
+Once you are in your server, select on <b>Databases</b> on the left. If you have existing databases, they will automatically be shown here. Otherwise, you can create one.
+
+<b>Name</b>: This name must be unique.
+<b>Connection From</b>: You can limit certain IPs from connecting to your database. By default, you can leave it empty to allow all IPs.
+
+![database-create](/images/database/create.png)
+
+# Managing your Database
+
+Once you create your database, you have the options to upload or download the database making snapshots when needed. Select on the eye icon to view your connection details 
+which also contains your password. From here, you have all the information you need to plug into your configuration file. 
+
+![database-preview](/images/database/preview.png)
+
+You may also select on <b>Rotate Password</b> in case you think your password is leaked. By doing so, please go back into your configuration files and update the information to avoid interruptions.
+
+![database-details](/images/database/details.png)
+
+# Viewing the database
+
+By downloading a client such as DBeaver or MySQL Workbench, you can enter the connection details to connect and make live changes. 

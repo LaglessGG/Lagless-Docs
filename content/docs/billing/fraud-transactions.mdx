@@ -1,0 +1,282 @@
+---
+title: Fraud-Marked Transactions
+description: What to do when your payment is flagged as fraudulent and how to resolve the issue
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Cards, Card } from 'fumadocs-ui/components/card';
+import { Accordions, Accordion } from 'fumadocs-ui/components/accordion';
+import { AlertTriangle, Phone, CreditCard } from 'lucide-react';
+
+# Fraud-Marked Transactions
+
+**"My payment was declined and marked as fraud - what happened?"**
+
+## Quick Answer
+
+<Callout type="info" title="Short Summary">
+**Your payment was blocked for security reasons by either your bank OR Lagless.gg's fraud protection system.** No money was charged and your service wasn't activated. Contact your bank first to authorize the transaction, then retry. If the issue persists, open a support ticket with us.
+</Callout>
+
+Transactions can be flagged as fraudulent by two different systems:
+
+1. **Your Bank/Payment Processor** - Automatic fraud detection to protect your account
+2. **Lagless.gg** - Our internal fraud protection system to prevent unauthorized purchases
+
+Both systems are designed to protect you from unauthorized charges, but they require different resolution steps.
+
+<Callout type="warn" title="Transaction Blocked for Security">
+Regardless of which system blocked your payment, **no money has been charged** and **your service hasn't been activated**. The transaction was blocked before completion to protect your account.
+</Callout>
+
+## What Is Fraud Detection?
+
+Fraud detection systems monitor transactions for suspicious patterns that might indicate unauthorized use of your payment method. These systems err on the side of caution to protect your financial accounts.
+
+### Bank Fraud Detection
+Your bank or payment processor automatically scans transactions for suspicious activity and blocks potentially fraudulent charges.
+
+### Lagless.gg Fraud Protection
+We also have our own fraud protection system that may block transactions based on various risk factors to protect both you and our service.
+
+### Common Fraud Triggers
+
+**Bank/Payment Processor:**
+- **Unusual location**: Purchasing from a location different from your normal spending patterns
+- **New merchant**: First-time purchases from unfamiliar businesses
+- **Large amounts**: Transactions significantly larger than your typical spending
+- **International transactions**: Payments to businesses in different countries
+- **Rapid purchases**: Multiple payment attempts in quick succession
+
+**Lagless.gg System:**
+- **VPN/Proxy usage**: Payment attempts through VPN or proxy connections
+- **Suspicious account activity**: New accounts with unusual purchasing patterns
+- **High-risk payment methods**: Certain payment types that have higher fraud rates
+- **Geographic inconsistencies**: Mismatched billing and IP locations
+- **Velocity checks**: Too many payment attempts in a short time period
+
+<Callout type="info" title="Automatic Protection">
+Fraud detection is an automatic security feature provided by both banks/payment processors AND Lagless.gg. Both systems are designed to protect you from unauthorized transactions.
+</Callout>
+
+## What Happened to Your Payment?
+
+When a transaction is flagged as fraud, here's the typical sequence of events:
+
+<Steps>
+  <Step>
+    **Payment Initiation**
+    You attempted to purchase a Lagless.gg service using your payment method.
+  </Step>
+
+  <Step>
+    **Fraud Detection Activated**
+    Either your bank's fraud detection system OR Lagless.gg's fraud protection system identified the transaction as potentially suspicious.
+  </Step>
+
+  <Step>
+    **Transaction Blocked**
+    The payment was automatically declined and blocked before any money was transferred.
+  </Step>
+
+  <Step>
+    **Decline Notification**
+    You received an error message indicating the payment was declined or marked as fraud.
+  </Step>
+
+  <Step>
+    **Service Not Activated**
+    Since no payment was completed, your Lagless.gg service was not activated.
+  </Step>
+
+  <Step>
+    **Security Alert**
+    You may have received a text message, email, or phone call from your bank about the attempted transaction.
+  </Step>
+</Steps>
+
+## How to Resolve This Issue
+
+### Step 1: Determine Who Blocked the Transaction
+
+**If the error message mentions "fraud" or "security":**
+- This is usually a bank/payment processor block
+- Follow Steps 2-4 below
+
+**If the error message is from Lagless.gg or mentions our fraud protection:**
+- This is our internal system
+- Skip to Step 5 (Contact Support)
+
+### Step 2: Contact Your Bank First (For Bank Blocks)
+
+<Cards>
+  <Card
+    title="Call Your Bank"
+    icon={<Phone />}
+  >
+    Contact your bank or credit card company to report that the transaction was legitimate and authorize future payments to Lagless.gg.
+  </Card>
+  
+  <Card
+    title="Verify Your Identity"
+    icon={<CreditCard />}
+  >
+    Your bank may ask you to verify your identity and confirm that you attempted to make the purchase.
+  </Card>
+</Cards>
+
+### Step 3: Authorization Process (For Bank Blocks)
+
+Most banks will ask you to:
+
+1. **Verify the transaction details** (amount, merchant name, date/time)
+2. **Confirm your identity** using security questions or codes
+3. **Authorize the merchant** (Lagless.gg) for future transactions
+4. **Update your account settings** if needed
+
+### Step 4: Retry Your Payment (For Bank Blocks)
+
+<Callout type="warn" title="Wait Before Retrying">
+Wait at least 15-30 minutes after speaking with your bank before attempting the payment again. It can take time for authorization changes to take effect.
+</Callout>
+
+Once your bank has authorized the transaction:
+
+1. **Clear your browser cache** and cookies
+2. **Disable any VPN** connections
+3. **Use the same payment method** you discussed with your bank
+4. **Try the payment again** on Lagless.gg
+
+### Step 5: Contact Lagless.gg Support (For Our Fraud Protection)
+
+If the transaction was blocked by our fraud protection system:
+
+<Callout type="info">
+Please [open a support ticket](https://my.lagless.gg/submitticket.php?step=2&deptid=6) immediately. Include:
+- The exact error message you received
+- Your account email address
+- Payment method you were trying to use
+- Any VPN or proxy services you were using
+</Callout>
+
+Our team can review your account and payment attempt to determine why it was flagged and help resolve the issue.
+
+## Prevention Tips
+
+To reduce the likelihood of future fraud flags:
+
+<Accordions>
+<Accordion title="Pre-authorize Gaming Purchases" id="preauth">
+Contact your bank to pre-authorize gaming and hosting service purchases. Many banks can add notes to your account about legitimate recurring expenses.
+
+**What to tell your bank**: "I regularly purchase gaming server hosting services online and want to prevent fraud flags on these transactions."
+</Accordion>
+
+<Accordion title="Use Consistent Payment Methods" id="consistent">
+Stick to the same payment method and avoid switching between different cards or payment services frequently.
+
+**Benefits**: Establishes a pattern of legitimate use that fraud detection systems recognize.
+</Accordion>
+
+<Accordion title="Avoid VPN During Payments" id="no-vpn">
+Disable VPN connections when making payments, as they can trigger location-based fraud detection.
+
+**Why**: VPNs make it appear you're purchasing from a different location, which can trigger security systems.
+</Accordion>
+
+<Accordion title="Keep Bank Information Updated" id="updated-info">
+Ensure your bank has your current phone number and email address for fraud alerts and verification.
+
+**Important**: Up-to-date contact information helps banks reach you quickly for transaction verification.
+</Accordion>
+</Accordions>
+
+## Common Scenarios
+
+### Scenario 1: First-Time Customer
+
+**Situation**: You're new to Lagless.gg and your first purchase was flagged.
+
+**Solution**: 
+- This is very common for new merchants
+- Call your bank to verify the transaction
+- Ask them to whitelist Lagless.gg for future purchases
+- Retry the payment after authorization
+
+### Scenario 2: International Customer
+
+**Situation**: You're located outside the US and your payment was flagged.
+
+**Solution**:
+- International transactions are commonly flagged
+- Contact your bank to authorize international online purchases
+- Consider using a payment method known to work internationally
+- Ensure your billing address matches your bank records
+
+### Scenario 3: Large Purchase Amount
+
+**Situation**: You're purchasing an expensive server package and it was flagged.
+
+**Solution**:
+- Large purchases often trigger fraud detection
+- Call your bank to authorize the specific amount
+- Consider splitting the purchase if possible
+- Ask about temporary spending limit increases
+
+## What NOT to Do
+
+<Callout type="error" title="Avoid These Actions">
+- **Don't try multiple payment methods rapidly** - this can trigger additional fraud flags
+- **Don't use different billing addresses** - stick to your registered bank address
+- **Don't ignore bank security alerts** - respond to them promptly
+- **Don't assume it's a Lagless.gg error** - the block happens before we see the transaction
+</Callout>
+
+## When Fraud Detection Helps
+
+Remember that fraud detection systems are there to protect you:
+
+- **Unauthorized use prevention**: Stops criminals from using stolen card information
+- **Account security**: Protects your financial accounts from fraudulent charges
+- **Peace of mind**: Provides an extra layer of security for online transactions
+- **Quick resolution**: Most legitimate transactions can be authorized quickly
+
+## Frequently Asked Questions
+
+<Accordions>
+<Accordion title="Why was my payment marked as fraud?" id="why-fraud">
+Fraud detection systems use various factors including location, purchase patterns, and merchant history to identify potentially suspicious transactions. Your payment likely triggered one or more of these security measures.
+</Accordion>
+
+<Accordion title="Will this happen every time I try to pay?" id="every-time">
+Usually no. Once you've authorized Lagless.gg with your bank and established a payment history, future transactions are less likely to be flagged.
+</Accordion>
+
+<Accordion title="Can Lagless.gg fix this for me?" id="lagless-fix">
+It depends on who blocked the transaction. If your bank blocked it, you need to contact them directly. If our fraud protection system blocked it, please open a support ticket and we can review and potentially resolve the issue.
+</Accordion>
+
+<Accordion title="How long does bank authorization take?" id="auth-time">
+Bank authorization is usually immediate, but it can take 15-30 minutes for the changes to propagate through their systems. Some banks may take up to a few hours.
+</Accordion>
+
+<Accordion title="What if my bank won't authorize the transaction?" id="bank-refuses">
+If your bank is unwilling to authorize the transaction, consider using a different payment method, or contact us via support ticket to discuss alternative payment options.
+</Accordion>
+</Accordions>
+
+## Still Need Help?
+
+If you've followed these steps and are still unable to complete your payment:
+
+<Callout type="info">
+Please [open a support ticket](https://my.lagless.gg/submitticket.php?step=2&deptid=6) with our billing support team. Include details about:
+- The error message you received
+- When you contacted your bank
+- What payment method you're trying to use
+- Any authorization codes your bank provided
+</Callout>
+
+---
+
+*Fraud detection is a security feature designed to protect you. While it can be inconvenient, it's an important safeguard for your financial accounts.* 

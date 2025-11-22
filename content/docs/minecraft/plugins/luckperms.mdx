@@ -1,0 +1,147 @@
+---
+title: LuckPerms
+description: Control features/permissions between servers
+---
+
+# What is LuckPerms?
+
+LuckPerms is a plugin that manages permissions to certain groups across multiple servers.
+You can use LuckPerms to enforce what commands players can use.
+
+# Installing Plugin
+
+Find Luckperms under <b>Plugins</b> and select on download.
+
+![luckperms-search](/images/minecraft/luckperms/search.png)
+
+Depending on your what version of Minecraft is running, you may need to switch plugin versions.
+For this example, I'm using Velocity so I'll install <b>v5.5.0 (Velocity)</b>. After selecting the version, you can select <b>Install Plugin</b>
+
+![luckperms-install](/images/minecraft/luckperms/install.png)
+
+Make sure to install the plugin on every server you intend to enforce permissions across.
+
+### Verify it's working
+
+To confirm LuckPerms is running, start your server.
+You should see log entries similar to the output below, confirming the plugin loaded successfully.
+
+```bash
+container@pterodactyl~ java -Dterminal.jline=false -Dterminal.ansi=true -Xms256M -Xmx7372M -jar server.jar
+[04:35:06 INFO]: Booting up Velocity 3.4.0-SNAPSHOT (git-d2d333a9-b528)...
+[04:35:06 INFO]: Loading localizations...
+[04:35:07 INFO]: Connections will use epoll channels, libdeflate (Linux x86_64) compression, OpenSSL 3.x.x (Linux x86_64) ciphers
+[04:35:07 WARN]: Player info forwarding is disabled! All players will appear to be connecting from the proxy and will have offline-mode UUIDs.
+[04:35:07 INFO]: Loading plugins...
+[04:35:07 INFO]: Loaded plugin luckperms 5.5.0 by Luck
+[04:35:07 INFO]: Loaded 2 plugins
+[04:35:08 INFO]:         __    
+[04:35:08 INFO]:   |    |__)   LuckPerms v5.5.0
+[04:35:08 INFO]:   |___ |      Running on Velocity - Velocity
+[04:35:08 INFO]:
+[04:35:08 INFO] [luckperms]: Loading configuration...
+[04:35:08 INFO] [luckperms]: Loading storage provider... [H2]
+[04:35:08 INFO] [luckperms]: Loading internal permission managers...
+[04:35:08 INFO] [luckperms]: Performing initial data load...
+[04:35:08 INFO] [luckperms]: Successfully enabled. (took 1363ms)
+container@hydra-dal~ Server marked as running...
+[04:35:08 INFO]: Listening on /[0:0:0:0:0:0:0:0]:25566
+[04:35:08 INFO]: Done (1.77s)!
+```
+
+# Configuring LuckPerms
+
+In <b>File Manager</b>, you can find the config files under <b>plugins/luckperms/</b>
+
+- `config.yml` is your config file for Bukkit, Spigot, etc
+- `luckperms.conf` is your config file for Sponge or Fabric
+
+<Callout type="warn" title="Database File">
+    When configuring LuckPerms, make sure you <b>DO NOT</b> delete <b>luckperms-h2-v2.mv.db</b>. By default, LuckPerms
+    stores its data locally. If you intend on only having one server, you can keep this for your permission data. 
+</Callout>
+
+### Local Database Files
+
+By default, Luckperms uses H2. Depending on your preference, you can set `storage-method` in <b>config.yml</b>
+to SQLite. If you plan on using H2 or SQLite, modifying data outside Minecraft may be harder since you'll need a program
+that can read the data. 
+
+If you want to read and edit quicker, you can use `yaml`, `json`, `hocon`, or `toml` based on your preference.
+
+Remember that these options are better if you only have one server. Do not use any of these options if you are running more servers.
+
+### Switching to MariaDB/MySQL
+
+Planning on running multiple servers? You can setup LuckPerms to run with MySQL so you can sync data back and forth.
+
+<Card href="/using-the-panel/databases" title="Databases">
+    Looking for more information about databases? Click on me to read our dedicated article.
+</Card>
+
+Once you create your database, copy the information and plug into the config file as so. After filling in your information, your file should look similar to ours.
+
+```yml
+storage-method: mariadb
+
+# The following block defines the settings for remote database storage methods.
+#
+# - You don't need to touch any of the settings here if you're using a local storage method!
+# - The connection detail options are shared between all remote storage types.
+
+data:
+
+  # Define the address and port for the database.
+  # - The standard DB engine port is used by default
+  #   (MySQL: 3306, PostgreSQL: 5432, MongoDB: 27017)
+  # - Specify as "host:port" if differs
+  address: cantura.stelhosting.com:3306
+
+  # The name of the database to store LuckPerms data in.
+  # - This must be created already. Don't worry about this setting if you're using MongoDB.
+  database: s327_luckperms
+
+  # Credentials for the database.
+  username: u327_2wFDR152FG
+  password: 'RMUJH+kjXEWzFpL4EU.1=q5W'
+```
+
+Save your file and then restart. When looking at your console, it should say `SQL` instead of `H2`
+
+```bash
+[04:55:43 INFO]: Loading plugins...
+[04:55:43 INFO]: Loaded plugin luckperms 5.5.0 by Luck
+[04:55:43 INFO]: Loaded 2 plugins
+[04:55:44 INFO]:         __    
+[04:55:44 INFO]:   |    |__)   LuckPerms v5.5.0
+[04:55:44 INFO]:   |___ |      Running on Velocity - Velocity
+[04:55:44 INFO]:
+[04:55:44 INFO] [luckperms]: Loading configuration...
+[04:55:44 INFO] [luckperms]: Loading storage provider... [MARIADB]
+[04:55:44 INFO] [me.lucko.luckperms.lib.hikari.HikariDataSource]: luckperms-hikari - Starting...
+[04:55:44 INFO] [me.lucko.luckperms.lib.hikari.HikariDataSource]: luckperms-hikari - Start completed.
+[04:55:44 INFO] [luckperms]: Loading messaging service... [SQL]
+[04:55:44 INFO] [luckperms]: Loading internal permission managers...
+[04:55:44 INFO] [luckperms]: Performing initial data load...
+[04:55:44 INFO] [luckperms]: Successfully enabled. (took 736ms)
+container@hydra-dal~ Server marked as running...
+[04:55:44 INFO]: Listening on /[0:0:0:0:0:0:0:0]:25566
+[04:55:44 INFO]: Done (1.18s)!
+```
+
+Repeat this for as many servers you have. Remember, you only need <b>one</b> database to share across all your servers.
+
+# Debugging
+
+If you get an error similar to this:
+
+```bash
+[04:54:56 WARN] [me.lucko.luckperms.lib.mariadb.message.server.ErrorPacket]: Error: 1045-28000: Access denied for user 'u327_2wFDR152FG'@'23.129.100.66' (using password: YES)
+```
+Go back and make sure your database password is the same as whats in the config.
+
+![database-preview](/images/database/preview.png)
+
+After selecting the eye icon, your password along with the rest of your connection information is there.
+
+![database-details](/images/database/details.png)

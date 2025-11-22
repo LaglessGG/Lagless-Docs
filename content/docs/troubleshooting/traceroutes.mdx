@@ -1,0 +1,81 @@
+---
+title: Traceroutes
+description: A network tool used to show the routes from you to our servers (or vice versa)
+---
+
+import { Card, Cards } from "fumadocs-ui/components/card";
+
+# Benefits of an MTR
+
+Nobody likes a laggy server, and in case of network issues, traceroute analysis will assist us in finding the issue between the 
+client (your network) and the server (Lagless infrastructure). From the MTR results, we will be able to determine if the issue 
+originates with an Internet Service Provider (ISP), Lagless infrastructure or another internet provider along the route. 
+Upon submitting a ticket, we'd ask for this information to better assist with your issues.
+
+<Callout type="info" title="Reference">
+  Most MTR outputs look similar or almost the same. For reference, you can use 
+  the MTR from Linux to compare with yours if you are using Windows or MacOS
+</Callout>
+
+## Installation 
+
+### Windows
+
+We recommend downloading and running WinMTR. Once you unzip the download, you may run the proper executable depending on your system bit (x32 vs x64).
+
+<Card href="https://sourceforge.net/projects/winmtr/" title="WinMTR Download">
+  Download a copy of WinMTR from the SourceForge website.
+</Card>
+
+Upon opening the program, you would input your host (IP of Lagless server) and hit start.
+
+### MacOS
+
+You'll need to install Homebrew, a package manager for macOS. Paste this into Terminal and afterwards you can install MTR with the second command.
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install mtr
+```
+
+### Linux
+
+Depending on your distro of choice, you can use either command. Should you use snap, you can install MTR through that too.
+
+<Tabs items={["Debian/Ubuntu", "CentOS/RHEL", "Snap"]}>
+```bash tab
+sudo apt-get install mtr
+```
+
+```bash tab
+sudo yum install mtr
+```
+
+```bash tab
+sudo snap install mtr
+```
+
+</Tabs>
+
+## Output Analysis
+
+If you are using MacOS/Linux, you can run `mtr 23.167.232.1` or your server IP and should receive something similar to this. 
+
+```bash
+ams-01 (89.37.98.230) -> 23.167.232.1 (23.167.232.1)                          2025-06-07T21:53:49-0400
+
+Host                                                    Loss%  Snt  Last  Avg   Best  Wrst  StDev
+1. 89.37.98.225                                          0.0%   23   0.1   0.1   0.1   0.2   0.0
+2. 45.152.39.180                                         0.0%   23   0.5   0.6   0.5   0.7   0.0
+3. ar1.ams2.backbone.direct                              0.0%   23   0.6   0.6   0.6   0.8   0.0
+4. neoprotect.era-ix.net                                 0.0%   23   0.4   0.4   0.4   0.5   0.0
+5. filter.ams-02.neoprotect.as199414.net                 0.0%   23   0.4   0.4   0.3   0.4   0.0
+6. core.ams-01.neoprotect.as199414.net                   0.0%   23   0.5   0.5   0.4   0.6   0.0
+7. core.dal-01.neoprotect.as199414.net                   0.0%   23 107.2 107.1 107.1 107.2   0.0
+8. lo.cr1-dal1-us.as62553.net                            0.0%   22 106.1 106.2 106.1 106.3   0.1
+```
+
+From here, this shows that your ISP went through Backbone.Direct to NeoProtect's infrastructure lastly ending at our Dallas network.
+In this example, you can see that the latency in Amsterdam is \<1 ms however when the route goes from NeoProtect in Amsterdam to Dallas, that's where the latency jumps.
+This is more common because we're traveling overseas. If you are running an MTR from the same region, that latency would be a lot better. 

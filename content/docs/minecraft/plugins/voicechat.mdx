@@ -1,0 +1,64 @@
+---
+title: Simple Voice Chat
+description: Your step by step way of making voice chat work!
+---
+
+# Getting Started
+Under your server, go to <b>Plugins</b> and select the Install button for <i>Simple Voice Chat</i> mod.
+
+![voicechat-plugins](/images/minecraft/voicechat/plugins.png)
+
+Select the build and <b>Install Plugin</b>
+
+![voicechat-install](/images/minecraft/voicechat/install.png)
+
+# Configuring the plugin
+
+You'll need to create a new allocation under <b>Network</b> and use that port for the plugin to work accordingly.
+
+![voicechat-allocation](/images/allocations/page.png)
+
+<Callout type="warn">
+  Make sure to only select <b>Create Allocation</b> and NOT <b>Make Primary</b>. Using the same port for Minecraft and the plugin will 
+  cause issues.
+</Callout>
+
+Next, go into <b>Files</b> and find your config file.
+
+<Tabs items={["Fabric/NeoForge/Forge/Quilt", "Bukkit/Spigot/Paper"]}>
+```bash tab
+config/voicechat/voicechat-server.properties
+```
+
+```bash tab
+plugins/voicechat/voicechat-server.properties
+```
+
+</Tabs>
+
+Anything within the selection is customizable, however make sure to change the port to the allocation you created earlier. 
+
+```bash
+# Simple Voice Chat server config v2.5.32
+
+# The port number to use for the voice chat communication.
+# Audio packets are always transmitted via the UDP protocol on the port number
+# specified here, independently of other networking used for the game server.
+# Set this to '-1' to use the same port number that is used by the Minecraft server.
+# However, it is strongly recommended NOT to use the same port number because UDP on
+# it is also used by default for the server query. Doing so may crash the server!
+port=50127
+```
+
+Afterwards, restart your server and make sure the plugin is running on the right port.
+
+```bash
+[02:56:36 INFO]: Done (5.630s)! For help, type "help"
+container@hydra-dal~ Server marked as running...
+[02:56:36 INFO]: [voicechat] Loading plugins
+[02:56:36 INFO]: [voicechat] Loaded 0 plugin(s)
+[02:56:36 INFO]: [voicechat] Initializing plugins
+[02:56:36 INFO]: [voicechat] Initialized 0 plugin(s)
+[02:56:36 INFO]: [voicechat] Using server-ip as bind address: 0.0.0.0
+[02:56:36 INFO]: [voicechat] Voice chat server started at 0.0.0.0:50127
+```

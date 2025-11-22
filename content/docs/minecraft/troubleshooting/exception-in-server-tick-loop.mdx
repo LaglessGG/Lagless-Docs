@@ -1,0 +1,44 @@
+---
+title: Minecraft Java Exception In Tick Loop Fix
+description: How to fix the exception in server tick loop crash on your Minecraft server.
+---
+## Introduction
+
+If your Minecraft server is crashing with a "java.lang.NullPointerException: Exception in server tick loop" error, this is usually caused by corrupted player data files. Here's how to fix it.
+
+## Prerequisites
+
+- Access to the [Lagless Panel](https://panel.lagless.gg).
+- A running Minecraft Java Edition server managed through Lagless Panel.
+- Basic understanding of server management.
+
+## Steps to Fix Session Lock errors
+
+### 1. Log in to the Lagless Panel
+
+1. Open your web browser and go to the [Lagless Panel](https://panel.lagless.gg).
+2. Log in with your Lagless Panel credentials.
+
+### 2. Navigate to Your Server
+
+1. From the Lagless Panel dashboard, select the Minecraft server you want to configure.
+2. Click on the server name to access its management page.
+
+### 3. Stop your server (if running)
+
+1. Press the "Stop" button on the top right of the panel.
+
+### 4. Access the File Manager
+
+1. In the server management interface, navigate to the **File** tab.
+2. Delete the `ops.json`, `usercache.yml`, and `whitelist.json` files
+   ![ops-usercache-whitelist](/images/tutorials/ops-usercache-whitelist.png)
+
+### 5. Start your server
+
+1. After making the necessary changes
+2. Go back to the server management interface and start the server.
+
+## Conclusion
+
+By fixing the "java.lang.NullPointerException: Exception in server tick loop at net.minecraft.server.v1_7_R3.JsonList.load(JsonList.java:171)" crash, you can now start your server without a crash.

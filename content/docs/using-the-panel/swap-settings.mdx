@@ -1,0 +1,100 @@
+---
+title: Swap Settings
+description: How to configure swap space for your Lagless server
+---
+
+
+
+# Swap Settings
+
+This guide explains what swap space is, how it's used in Lagless, and how to configure it for your server.
+
+<Callout type="info">
+Most users (99%) do not need to modify the default swap settings. If your server is performing well, there's no need to change anything.
+</Callout>
+
+## What is Swap?
+
+Swap is virtual memory stored on disk rather than in physical memory (RAM). It functions as a memory extension but operates significantly slower than physical RAM.
+
+## How Lagless Uses Swap
+
+By default, all Lagless servers are allocated 512MB of swap space. This allocation helps cover Java's overhead requirements, particularly when using optimized settings like Aikar's flags, with minimal performance impact in most scenarios.
+
+However, there are specific situations where you might want to disable swap, which is why we provide this option.
+
+## When to Modify Swap Settings
+
+The primary reason to consider disabling swap is when running memory-intensive applications like Forge modpacks. These modpacks require substantial memory during startup, and with certain optimization flags, the server might experience performance degradation due to excessive swapping.
+
+Disabling swap might provide:
+- Slightly improved performance
+- Better tick rates (MSPT)
+- Support for more concurrent users
+
+## How to Enable or Disable Swap
+
+You can manage swap settings in your server control panel:
+
+<Steps>
+  <Step>
+    Navigate to the Settings section in your Lagless dashboard
+  </Step>
+  
+  <Step>
+    Scroll down to the bottom of the page to find the "Swap Settings" section
+  </Step>
+  
+  <Step>
+    Toggle the switch to enable (on) or disable (off) the 512MB swap space
+  </Step>
+  
+  <Step>
+    Click the "Save" button to apply your changes
+  </Step>
+</Steps>
+
+![Swap settings toggle in the Lagless control panel](/images/swap.png)
+
+## Important Considerations
+
+<Callout type="warn" title="Memory Overhead">
+If you disable swap, your server needs adequate memory overhead for the Java Virtual Machine (JVM). Without swap, servers using optimization flags may fail to start due to insufficient overhead.
+</Callout>
+
+When swap is disabled:
+
+1. You may need to adjust your startup RAM allocation percentage (typically to around 70%)
+2. The exact percentage varies between servers and applications
+3. If your server freezes, it might indicate insufficient overhead
+4. "Out of memory" errors in logs indicate the JVM itself is out of memory
+
+## Troubleshooting
+
+<Accordions>
+<Accordion title="Server Won't Start After Disabling Swap" id="wont-start">
+If your server fails to start after disabling swap, try:
+- Re-enabling swap temporarily
+- Adjusting your startup RAM allocation to a lower percentage (e.g., 70%)
+- Increasing your server's total RAM allocation
+</Accordion>
+
+<Accordion title="Performance Issues With Swap Enabled" id="performance">
+If you're experiencing performance issues with swap enabled:
+- Monitor your server's memory usage with diagnostic tools
+- Check for memory leaks using heapdump tools
+- Consider upgrading your server's RAM if you consistently use all available memory
+</Accordion>
+
+<Accordion title="When to Keep Swap Enabled" id="keep-enabled">
+Keep swap enabled if:
+- You're not experiencing performance issues
+- Your server runs memory-intensive applications
+- You frequently see "out of memory" errors
+- Your server needs to run for extended periods without restarts
+</Accordion>
+</Accordions>
+
+## Summary
+
+At Lagless, we aim to provide you with complete control over your server environment. The swap configuration option gives you another tool to optimize your server's performance for your specific needs. For most users, the default setting works well, but power users running specialized workloads may benefit from customizing this setting. 

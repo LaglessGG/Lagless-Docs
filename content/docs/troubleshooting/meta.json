@@ -1,0 +1,6 @@
+{
+    "title": "Server Troubleshooting",
+    "icon": "Server",
+    "index": "index",
+    "pages": ["traceroutes"]
+}

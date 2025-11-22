@@ -1,0 +1,57 @@
+---
+title: Whitelisting Players
+description: Keep certain people in your server while keeping others out
+---
+
+# General Information
+
+Why even whitelist? Nowadays anyone can figure out the IP and port to a server and grief your world. You can whitelist your server, blocking strangers and only letting people you know in.
+
+The commands in this wiki are provided without the `/` (slash) included. If you are executing these commands via Console, the slash is already assumed.
+When running the commands as OP in-game, you will need the `/` (slash) to properly execute the commands.
+
+Respectively, Java uses `whitelist` while Bedrock uses `allowlist`. Generally the commands are the same but are provided depending on which server you're running.
+
+## Java Edition
+
+### Commands
+
+`whitelist add <name>`
+- Adds the player profile(s) to the whitelist. The player does not need to be online.
+
+`whitelist list`
+- Displays all player profiles in the whitelist.
+
+`whitelist off`
+- Disables the server’s use of a whitelist.
+
+`whitelist on`
+- Enables the server’s use of a whitelist.
+
+`whitelist reload`
+- Reloads the list of player profiles in whitelist.json from disk (used when the file has been modified outside of Minecraft).
+
+`whitelist remove <name>`
+- Removes the player profile(s) from the whitelist. The player does not need to be online.
+
+## Bedrock Edition 
+
+### Allowlist Commands
+
+`allowlist add <name>`
+- Adds the player to the allowlist. The player does not need to be online.
+
+`allowlist list`
+- Displays all player names in the allowlist.
+
+`allowlist off`
+- Disables the server’s use of an allowlist.
+
+`allowlist on`
+- Enables the server’s use of an allowlist.
+
+`allowlist reload`
+- Reloads the list of players in allowlist.json from disk.
+
+`allowlist remove <name>`
+- Removes the player from the allowlist. The player does not need to be online.

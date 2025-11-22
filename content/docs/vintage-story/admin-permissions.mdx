@@ -1,0 +1,56 @@
+---
+title: Admin Permissions
+description: How to add and manage admins on your Vintage Story server
+---
+
+## Introduction
+
+This guide explains how to assign admin permissions to players on your Vintage Story server. Admins have access to moderation commands for managing the server.
+
+## What Admins Can Do
+
+Admins in Vintage Story have permission to use various commands that help with server moderation, including:
+
+- Kicking and banning players
+- Changing game modes
+- Teleporting players
+- Using cheat commands
+- Managing server settings
+
+## Assigning Admin Permissions
+
+You can grant admin permissions using the `op` command through your server's console.
+
+1. **Access your control panel** and navigate to your Vintage Story server.
+2. **Start your server** if it's not already running.
+3. **Go to the Console** section in your control panel.
+4. **Enter the command**: `/op <username>`
+   - Replace `<username>` with the exact username of the player you want to make an admin.
+
+5. **Press Enter** to execute the command.
+
+The player will now have admin permissions the next time they join the server.
+
+## Removing Admin Permissions
+
+To remove admin permissions from a player:
+
+1. **Go to the Console** in your control panel.
+2. **Enter the command**: `/player <username> role suplayer`
+   - Replace `<username>` with the player's exact username.
+
+<Callout type="info">
+This command changes the player's role to "suplayer" (super player), which removes their admin privileges. The player will lose admin permissions on their next login.
+</Callout>
+
+## Using Admin Commands In-Game
+
+Once a player has admin permissions, they can use commands directly in the game chat by typing them with a `/` prefix.
+
+For a full list of available admin commands, refer to the [Vintage Story Wiki](https://wiki.vintagestory.at/index.php/List_of_server_commands#Commands_for_Moderators_and_Admins).
+
+## Best Practices
+
+- **Grant admin sparingly**: Only give admin permissions to trusted players.
+- **Monitor usage**: Keep an eye on server logs for admin command usage.
+- **Regular reviews**: Periodically review who has admin access and remove it if needed.

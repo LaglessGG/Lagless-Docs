@@ -1,0 +1,14 @@
+{
+  "title": "Vintage Story",
+  "icon": "vintage-story",
+  "index": "index",
+  "pages": [
+    "server-setup",
+    "connecting",
+    "admin-permissions",
+    "mod-installation",
+    "troubleshooting",
+    "whitelist-server",
+    "world-configuration"
+  ]
+} 

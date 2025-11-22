@@ -1,0 +1,229 @@
+---
+title: Mod Installation
+description: How to install and manage mods on your Vintage Story server
+---
+
+import { Steps, Step } from 'fumadocs-ui/components/steps';
+
+# Vintage Story Mod Installation Guide
+
+Learn how to install, configure, and manage mods on your Vintage Story server. This guide covers everything from basic mod installation to advanced modpack management.
+
+## Understanding Vintage Story Mods
+
+Vintage Story mods come in different formats:
+- **`.cs` files** - Source code mods
+- **`.dll` files** - Compiled mods
+- **`.zip` files** - Asset mods (textures, sounds, etc.)
+
+## Correct Installation Location
+
+**Critical**: Install mods in the correct directory for proper functionality.
+
+### Server-Side Mods
+**Install in**: `data/Mods` folder
+
+- **✅ Correct**: `data/Mods`
+- **❌ Wrong**: `/Mods/` (root folder)
+
+The `data/Mods` folder is where the server looks for mods during startup.
+
+## Installing Mods
+
+### Method 1: File Manager (Recommended)
+
+1. **Access File Manager** in your server panel
+2. **Navigate** to `data/Mods`
+3. **Upload** your mod files directly to this folder
+4. **Restart** your server to load the mods
+
+### Method 2: FTP/SFTP
+
+1. **Connect** to your server via FTP/SFTP
+2. **Navigate** to `data/Mods`
+3. **Upload** mod files
+4. **Restart** server
+
+### Installation Steps
+
+<Steps>
+  <Step>
+  **Download mods** from reputable sources like the [Vintage Story Mod Database](https://mods.vintagestory.at/)
+  </Step>
+
+  <Step>
+  **Upload to server** - Place files in `data/Mods`
+  </Step>
+
+  <Step>
+  **Install configs** - Add any required configuration files
+  </Step>
+
+  <Step>
+  **Restart server** - Allow mods to load properly
+  </Step>
+
+  <Step>
+  **Test functionality** - Join server and verify mods work
+  </Step>
+</Steps>
+
+## Mod Configuration
+
+### Installing Mod Configs
+
+Many mods require configuration files:
+
+1. **Locate config files** - Usually named `ModConfig` or similar
+2. **Upload to server** - Place in `data/Mods`
+3. **Match file names** - Ensure configs match mod requirements
+4. **Restart server** - Load new configurations
+
+### Transferring Singleplayer Configs
+
+If you have working configs from singleplayer:
+
+1. **Find local configs** - Check your Vintage Story installation folder
+2. **Copy ModConfig files** - Transfer to your server
+3. **Upload via panel** - Place in `data/Mods`
+4. **Verify settings** - Check that configs applied correctly
+
+## World Generation Mods
+
+⚠️ **Important**: Mods that affect world generation must be installed **before** creating a new world.
+
+### Installation Order
+
+1. **Install world-gen mods first**
+2. **Delete existing world data** (if needed)
+3. **Start server** to generate new world
+4. **Verify generation** - Check that modded content appears
+
+### Common World-Gen Mods
+
+- **Terrain generation** - New biomes, structures
+- **Ore distribution** - Additional minerals
+- **Plant/tree mods** - New flora
+- **Weather systems** - Climate modifications
+
+## Client-Side Considerations
+
+### Automatic Mod Distribution
+
+- **Server-side mods** are automatically provided to clients
+- **Players don't need** to manually install most mods
+- **Clients download** required mods when connecting
+
+### Manual Client Installation
+
+Some mods may require client-side installation:
+- **Check mod documentation** for requirements
+- **Inform players** of manual installation needs
+- **Provide download links** for required mods
+
+## Modpack Management
+
+### Creating a Modpack
+
+1. **Plan your modpack** - List all desired mods
+2. **Check compatibility** - Ensure mods work together
+3. **Test locally** - Verify modpack in singleplayer
+4. **Document versions** - Keep track of mod versions
+
+### Installing Modpacks
+
+1. **Download all mods** from the modpack list
+2. **Upload to server** - Place all files in `data/Mods`
+3. **Install configs** - Add all configuration files
+4. **Generate new world** - Create world with modpack content
+
+## Troubleshooting Mods
+
+### Common Issues
+
+#### Mods Not Loading
+
+**Check:**
+- Files are in correct directory (`data/Mods`)
+- Server has been restarted after installation
+- Mods are compatible with server version
+
+#### Server Crashes
+
+**Solutions:**
+- Check server logs for specific error messages
+- Remove recently added mods to isolate issues
+- Verify mod compatibility with each other
+
+#### Config Errors
+
+**Fix:**
+- Ensure config files are properly formatted
+- Check for typos in configuration values
+- Restore default configs if needed
+
+### Performance Issues
+
+**Optimization:**
+- Remove unnecessary mods to reduce load
+- Check for resource-heavy mods
+- Monitor server performance metrics
+- Consider upgrading server resources
+
+## Best Practices
+
+### Before Installing Mods
+
+1. **Backup your server** - Always backup before making changes
+2. **Research mods** - Read documentation and reviews
+3. **Check compatibility** - Verify mod versions match server
+4. **Test individually** - Install mods one at a time for testing
+
+### Mod Management
+
+1. **Keep documentation** - Maintain a list of installed mods
+2. **Regular updates** - Check for mod updates periodically
+3. **Monitor logs** - Watch for mod-related errors
+4. **Backup configs** - Save working configuration files
+
+## Popular Mod Categories
+
+### Gameplay Enhancement
+- **Quality of life** improvements
+- **User interface** modifications
+- **Inventory management** tools
+
+### Content Expansion
+- **New items** and recipes
+- **Additional creatures** and entities
+- **Extended crafting** systems
+
+### World Modification
+- **Terrain generation** changes
+- **New biomes** and structures
+- **Weather and climate** systems
+
+## Getting Help
+
+### Mod-Specific Issues
+
+1. **Check mod documentation** - Read the mod's instructions
+2. **Visit mod forums** - Look for community solutions
+3. **Contact mod author** - Report bugs to developers
+
+### Server Issues
+
+1. **Check server logs** - Look for error messages
+2. **Contact support** - Include your Support ID
+3. **Provide details** - List installed mods and error messages
+
+## Additional Resources
+
+- [Vintage Story Mod Database](https://mods.vintagestory.at/)
+- [Official Modding Wiki](https://wiki.vintagestory.at/index.php?title=Adding_mods)
+- [Modding Community Discord](https://discord.gg/vintagestory)
+- [Mod Development Guide](https://wiki.vintagestory.at/index.php?title=Modding)
+
+<Callout type="info">
+Remember to always test mods in a development environment before installing them on your production server!
+</Callout> 

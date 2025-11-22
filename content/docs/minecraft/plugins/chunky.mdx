@@ -1,0 +1,87 @@
+---
+title: Chunky
+description: Your step-by-step guide to using Chunky to pregenerate a world
+---
+
+## Getting Started
+
+Install Chunky on your server by downloading either the [plugin](https://modrinth.com/plugin/chunky/versions?l=bukkit&l=paper&l=spigot) or [mod](https://modrinth.com/plugin/chunky/versions?l=fabric&l=neoforge&l=forge) and dragging & dropping the file into your server's `plugins` or `mods` folder. You can use an SFTP client or the **Plugins**/**Mods** tab in your game panel to do this.
+
+### Configuring Chunky
+
+<Steps>
+<Step>
+**Enable Continue-on-Restart (Recommended)**
+
+Chunky can use a lot of RAM and may require server restarts. To ensure your pregeneration continues after a restart, navigate to `/plugins/Chunky/config.yml` and change the setting from `continue-on-restart: false` to `continue-on-restart: true`. You typically won't need to change anything else in this file.
+</Step>
+<Step>
+**Verify Your Permissions**
+
+Make sure you have the necessary permissions to use Chunky's commands. The simplest method is to give yourself operator (OP) status using the console or an in-game command.
+
+```bash
+op snowman_sir
+[11:06:26 INFO]: Made snowman_sir a server operator
+```  
+If you are using a permissions plugin like LuckPerms, you can grant the wildcard permission `chunky.*`.
+</Step>
+</Steps>
+
+### Using Chunky
+
+<Callout type="info" title="Example">
+  The following example uses commands in the server console.  
+  You can also run them in-game, which provides autocomplete.  
+
+  It is recommended to pregenerate only one world at a time, especially for modded servers.
+</Callout>
+
+<Steps>
+<Step>
+Start by selecting the world you want to pregenerate by using the command `/chunky world world`
+
+```bash
+chunky world world
+[11:42:29 INFO]: [Chunky] World changed to world.
+```  
+</Step>
+<Step>
+**Set a worldborder** using the command `worldborder set 100` for 100 blocks, if you want chunks simply multiply by 16. (since each chunk is 16 blocks)  
+**Example**: To pregenerate a 5,000-chunk area, the diameter would be 5,000 * 16 = 80,000.
+
+```bash
+worldborder set 100
+[11:44:20 INFO]: Set the world border to 100.0 block(s) wide
+```  
+</Step>
+<Step>
+
+Use the command `chunky worldborder` so Chunky knows the world border size and center.
+```bash
+chunky worldborder
+[11:46:17 INFO]: [Chunky] Center changed to -519.5, -365.5.
+[11:46:17 INFO]: [Chunky] Radius changed to 50.
+```
+</Step>
+<Step>
+The final step, use the command `chunky start`. When it's finished it will tell you and you should no longer see any progress of generating.  
+```bash
+chunky start
+[11:58:59 INFO]: [Chunky] Task running for world. Processed: 8 chunks (0.00%), ETA: 1:22:43, Rate: 79.2 cps, Current: -63, -31
+[11:59:00 INFO]: [Chunky] Task running for world. Processed: 74 chunks (0.02%), ETA: 1:39:14, Rate: 66.0 cps, Current: -52, -29
+[11:59:01 INFO]: [Chunky] Task running for world. Processed: 226 chunks (0.06%), ETA: 1:05:37, Rate: 99.8 cps, Current: -57, -17
+[11:59:02 INFO]: [Chunky] Task running for world. Processed: 323 chunks (0.08%), ETA: 1:06:36, Rate: 98.3 cps, Current: -63, -7
+[11:59:03 INFO]: [Chunky] Task running for world. Processed: 428 chunks (0.11%), ETA: 1:05:59, Rate: 99.2 cps, Current: -51, -2
+[11:59:04 INFO]: [Chunky] Task running for world. Processed: 656 chunks (0.17%), ETA: 0:53:09, Rate: 123.1 cps, Current: -38, -4
+[11:59:05 INFO]: [Chunky] Task running for world. Processed: 1379 chunks (0.35%), ETA: 0:31:51, Rate: 204.9 cps, Current: -26, -8
+[11:59:06 INFO]: [Chunky] Task running for world. Processed: 1773 chunks (0.45%), ETA: 0:28:17, Rate: 230.6 cps, Current: -7, -15
+
+... Progress continues ...
+
+[11:48:51 INFO]: [Chunky] Task finished for world. Processed: 80000 chunks (100.00%), Total time: 0:30:00
+```
+</Step>
+</Steps>
+
+For more information, read the chunky wiki [here](https://github.com/pop4959/Chunky/wiki)

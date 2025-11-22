@@ -1,0 +1,121 @@
+---
+title: World Configuration and Generation Settings
+description: Learn how to configure world generation settings like landcover, oceanscale, and other terrain parameters for your Vintage Story server
+---
+## Introduction
+
+This guide will help you understand and configure world generation settings for your Vintage Story server. You'll learn how to modify terrain parameters like landcover, oceanscale, and other world generation options to create the perfect environment for your players.
+
+## Understanding World Configuration
+
+World generation settings in Vintage Story can be configured using console commands. This is the most reliable method for modifying terrain parameters on your server.
+
+## Available World Generation Parameters
+
+### Common World Configuration Options
+
+| Parameter | Description | Default Value |
+|-----------|-------------|---------------|
+| `landcover` | Controls the amount of land vs ocean | 0.7 |
+| `oceanscale` | Controls ocean size and distribution | 1.25 |
+| `upheavalCommonness` | Frequency of terrain upheavals | 0.3 |
+| `landformScale` | Scale of land formations | 1.2 |
+| `temporalStability` | Temporal storm frequency | 0.5 |
+| `temporalRifts` | Temporal rift frequency | 0.3 |
+
+## Configuring World Generation
+
+### Using Console Commands (Recommended)
+
+The most reliable way to configure world generation is through console commands:
+
+1. **Access your server console** through the [Lagless Panel](https://panel.lagless.gg)
+2. **Use the `/worldconfig` command** to set parameters:
+   ```
+   /worldconfig landcover 0.7
+   /worldconfig oceanscale 1.25
+   /worldconfig upheavalCommonness 0.3
+   /worldconfig landformScale 1.2
+   ```
+3. **Regenerate terrain** with the new settings:
+   ```
+   /wgen regen <radius>
+   ```
+   Replace `<radius>` with the number of chunks to regenerate (e.g., `100`)
+
+**Important:** This only affects newly generated chunks, not existing ones. You may see sharp chunk seams between old and new terrain.
+
+### Creating Custom Worlds in Single-Player
+
+For new worlds with custom settings from the start:
+
+1. **Open Vintage Story** in single-player mode
+2. **Go to "Customize World"** in the world creation menu
+3. **Set your desired values** for:
+   - Landcover
+   - Oceanscale
+   - Landform Scale
+   - Upheaval Commonness
+   - Temporal Stability
+   - Temporal Rifts
+4. **Save and close** the world
+5. **Copy the world files** to your server:
+   - Navigate to your single-player save directory
+   - Copy the entire world folder
+   - Paste it into your server's `data/Saves/` directory
+6. **Start your server** - it will now use the custom generation settings
+
+## Step-by-Step Guide: Using Console Commands
+
+### For Existing Worlds
+
+1. **Log into the [Lagless Panel](https://panel.lagless.gg)**
+2. **Navigate to your Vintage Story server**
+3. **Go to the Console tab**
+4. **Set your desired world configuration**:
+   ```
+   /worldconfig landcover 0.8
+   /worldconfig oceanscale 1.0
+   /worldconfig upheavalCommonness 0.2
+   ```
+5. **Regenerate terrain** to apply changes:
+   ```
+   /wgen regen 50
+   ```
+
+### For New Worlds
+
+1. **Create world in single-player** with custom settings
+2. **Copy world files** to server's save directory
+3. **Start server** with the custom world
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| Settings not taking effect | Make sure to use `/wgen regen` after setting worldconfig values |
+| Sharp terrain seams | This is normal when regenerating chunks in existing worlds |
+| Can't find world files | Check the `data/Saves/` directory in your server files |
+
+### Best Practices
+
+- **For existing worlds**: Use console commands with `/wgen regen`
+- **For new worlds**: Create in single-player mode first
+- **Always backup** your world before making changes
+- **Test settings** in single-player before applying to server
+
+## Summary
+
+| Your Situation | Best Approach |
+|----------------|---------------|
+| Existing world with players | Use `/worldconfig` commands + `/wgen regen` |
+| Want custom world from the start | Generate in single-player, customize via UI, then move world to server |
+| Modifying terrain parameters | Console commands are the most reliable method |
+
+## Conclusion
+
+By following this guide, you can effectively configure your Vintage Story server's world generation settings using console commands. Whether you're working with an existing world or starting fresh, these methods will help you create the perfect environment for your players.
+
+Console commands are the most reliable and straightforward way to modify world generation parameters on your Vintage Story server. 

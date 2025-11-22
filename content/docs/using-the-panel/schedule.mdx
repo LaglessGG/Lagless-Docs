@@ -1,0 +1,45 @@
+---
+title: Schedules
+description: This is how you set up a schedule
+---
+
+## Schedule
+
+1. Go to our website and login to the "Game Panel"
+
+![Game Panel Login](/images/schedules/Game_panel_login.png)  
+
+Once logged in.
+
+2. Click on "Manage server"
+3. Click on "Settings"
+4. Scroll down till you get to the "Schedules" section.
+5. Press "Create schedule"
+
+![Create Schedule](/images/schedules/create_schedules.png)  
+
+6. Set a name
+7. set the desired time. For example `0 12 * * *` This executes the schedule every day at 12:00
+8. press Create Schedule.
+
+![Create New Schedule](/images/schedules/Create_new_schedule.png)  
+
+9. click on "Manage schedule" on the newly created schedule.
+10. Click on "New Task"
+11. You have the options to "Send command", "Send power action" or "Create backup".
+
+### Example
+
+To restart your server every day at 12.
+Create a schedule. Set the time to `minute 0, hour 12, Day of month *, Month *, Day of week *`
+Create a task for this schedule and set the action to "send power action" and choose payload "Restart the server".
+
+![Edit Schedule](/images/schedules/editschedule.png)  
+
+```
+"Send command" is great if you wish to schedule events or send a "/say" command before restart
+"Send power action" is commonly used to restart servers.
+"Create backup" Is great for a scheduled nighttime backup
+```
+
+You can use all of these tasks in a single schedule. But Time offset may be required to delay each task.

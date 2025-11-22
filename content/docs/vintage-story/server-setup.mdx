@@ -1,0 +1,160 @@
+---
+title: Server Setup Guide
+description: Complete guide to setting up and configuring your Vintage Story server
+---
+
+# Vintage Story Server Setup Guide
+
+This guide will walk you through setting up your Vintage Story server on Lagless.gg, including version management and initial configuration.
+
+## Changing Game Version
+
+Vintage Story servers default to the **latest version**. If you need a specific version (like 1.20.10 for modpack compatibility):
+
+1. Navigate to your server's **Settings** page
+2. Scroll down to find the version settings
+3. Enter your desired version (e.g., `1.20.10`)
+4. **Important**: Scroll down and click **"Re-install"** to actually change the version
+5. Wait for the reinstallation process to complete
+
+<Callout title=".net requirement" type="warn">
+  Starting from version 1.21 Vintage Story requires the .net 8 Desktop Runtime, while older requires 7.
+</Callout>
+
+### Verifying Your Version
+
+To confirm your server is running the correct version:
+1. Start your server
+2. Join the game
+3. Use the command: `/info created version`
+4. This will show you what version the world was created with
+
+## Initial Server Configuration
+
+### Basic Settings
+
+After installing Vintage Story, you'll want to configure basic server settings:
+
+1. Navigate to **File Manager** in your panel
+2. Open `serverconfig.json`
+3. Configure the following key settings:
+
+```json
+{
+  "ServerName": "Your Server Name",
+  "WelcomeMessage": "Welcome to our server!",
+  "MaxClients": 16,
+  "Password": "",
+  "WorldName": "MyWorld",
+  "OnlyWhitelisted": false,
+  "AdvertiseServer": false
+}
+```
+
+#### Server Visibility
+
+To make your server appear on the public server list (so players can find it via the in-game browser), set `"AdvertiseServer": true` in `serverconfig.json`. If you want a private server, set it to `false`.
+
+### World Generation Settings
+
+Configure world generation in the `WorldConfig` section of `serverconfig.json`:
+
+- **WorldType**: `standard` or `creative`
+- **WorldSize**: Size of the world (larger = more exploration)
+- **MapSizeY**: World height (affects mountain height)
+
+## Starting Your Server
+
+1. **Start the server** from your control panel
+2. **Monitor the console** for any startup errors
+3. **Check server logs** if issues occur
+4. **Test connection** by joining with your client
+
+### First-Time Setup
+
+When starting for the first time:
+1. The server will generate a new world (this takes time)
+2. Wait for the message "Server started" in console
+3. Join the server to test connectivity
+4. [Configure admin permissions](/vintage-story/admin-permissions) if needed
+
+## Performance Optimization
+
+### Memory Allocation
+
+For optimal performance:
+- **Small servers (1-4 players)**: 2-4GB RAM
+- **Medium servers (5-8 players)**: 4-6GB RAM  
+- **Large servers (9+ players)**: 6GB+ RAM
+
+### JVM Arguments
+
+Vintage Story runs on .NET, but you can optimize performance through server settings:
+
+```json
+{
+  "TickTime": 50,
+  "MaxChunkRadius": 8,
+  "MaxConcurrentSaves": 2
+}
+```
+
+## Best Practices
+
+### Before Going Live
+
+1. **Test locally** - Verify your configuration works
+2. **Set up backups** - Configure automatic backups in the panel
+3. **Plan your world** - Decide on world settings before generating
+4. **Document settings** - Keep notes on your configuration
+
+### Server Management
+
+1. **Regular restarts** - Schedule daily restarts for stability
+2. **Monitor logs** - Watch for errors or warnings
+3. **Update carefully** - Test updates on a backup first
+4. **Backup frequently** - Use the panel's backup feature
+
+## Common Issues
+
+### Server Won't Start
+
+**Check for:**
+- Invalid JSON in `serverconfig.json`
+- Insufficient memory allocation
+- Port conflicts
+- Missing files after version change
+
+### Connection Issues
+
+**Troubleshoot:**
+- Verify server is running
+- Check firewall settings
+- Confirm version compatibility
+- Test with different clients
+
+### Performance Problems
+
+**Solutions:**
+- Reduce max chunk radius
+- Lower max concurrent players
+- Increase memory allocation
+- Check for resource-heavy mods
+
+## Getting Help
+
+If you encounter issues:
+
+1. **Check server logs** - Look for specific error messages
+2. **Join our Discord** - Get help from staff and community
+3. **Contact support** - Open a ticket with your Support ID
+4. **Include details** - Provide logs, error messages, and reproduction steps
+
+For immediate assistance, mention your **Support ID** when contacting staff.
+
+## Next Steps
+
+Once your server is running:
+- [Install mods](/vintage-story/mod-installation) to customize gameplay
+- [Configure advanced settings](/vintage-story/troubleshooting) for optimal performance
+- Invite friends and start your Vintage Story adventure! 

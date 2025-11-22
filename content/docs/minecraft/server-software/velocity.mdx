@@ -1,0 +1,101 @@
+---
+title: Velocity
+description: Setting up Velocity
+---
+
+# Preparing Your Server
+
+<Callout type="info" title="Note">
+  For Velocity to properly work, you need to disable <b>online-mode</b>. Lagless.gg may not be able to 
+  provide support for offline mode servers however it's needed in this scenario to function properly.
+</Callout>
+
+Under <b>Utilities</b>, select on <b>Splits</b> and create a sub-server to install Velocity on.
+
+![velocity-builds](/images/velocity/builds.png)
+
+![velocity-install](/images/velocity/install.png)
+
+# Modifying the Velocity Config
+
+The power of velocity is in the config file, `velocity.toml` which tells where to send players. You can view this example config to start connecting other servers together.
+
+<Callout type="warn" title="Note">
+  To make velocity properly work, make sure you are using the Server's UUID along with the port as shown below instead of the IP and port. 
+  If you are trying to send players to another server hosted in other regions that Lagless supports, you can use the IP and port instead. 
+
+  Your server's UUID is under <b>Settings</b>, scroll all the way down and look for <b>Server ID</b> under the <b>Debug Information</b> header.
+</Callout>
+
+```bash
+[servers]
+lobby = "be24d008-b233-4a67-be65-b5702f13c3c5:25567"
+hcf = "be24d008-b233-4a67-be65-b5702f13c3c5:25566"
+prison = "be24d008-b233-4a67-be65-b5702f13c3c5:26678"
+
+try = [
+  "lobby"
+]
+```
+
+The `try` section of this config will tell Velocity where to try sending players once they first connect or if a server unexpectedly closes, 
+Velocity will send the player back here as well. The `try` block also goes down in order so if you had `try = ["lobby", "hcf"]`, players will 
+automatically connect to `lobby` but if `lobby` is down, it'll try sending your players to `hcf` instead.
+
+# Configure Player Information Forwarder
+
+Inside your velocity config, make sure you set your mode to `modern`.
+
+```bash
+# Should we forward IP addresses and other data to backend servers?
+# Available options:
+# - "none":        No forwarding will be done. All players will appear to be connecting
+#                  from the proxy and will have offline-mode UUIDs.
+# - "legacy":      Forward player IPs and UUIDs in a BungeeCord-compatible format. Use this
+#                  if you run servers using Minecraft 1.12 or lower.
+# - "bungeeguard": Forward player IPs and UUIDs in a format supported by the BungeeGuard
+#                  plugin. Use this if you run servers using Minecraft 1.12 or lower, and are
+#                  unable to implement network level firewalling (on a shared host).
+# - "modern":      Forward player IPs and UUIDs as part of the login process using
+#                  Velocity's native forwarding. Only applicable for Minecraft 1.13 or higher.
+player-info-forwarding-mode = "modern"
+```
+
+# Configuring Backend Servers
+
+Under your servers, go to <b>Files</b> and find your `server.properties` file. Open it and find the line that says:
+
+```bash
+online-mode: true
+```
+
+Change true to false then restart your server to apply the changes.
+
+## Forwarding Secret
+
+You'll need the forwarding secret from your proxy server to put into your Paper server.
+
+![velocity-find-secret](/images/velocity/find-secret.png)
+
+![velocity-secret](/images/velocity/secret.png)
+
+Inside of File Manager, open `config/paper-global.yml` and scroll down to proxies. Make sure you set `bungee-cord`'s `online-mode` to false after enabling 
+velocity and pasting your secret key there.
+
+![velocity-paper-config](/images/velocity/paper-config.png)
+
+# Testing Velocity
+
+Inside of Minecraft, you should be able to connect through your velocity proxy and be routed to the proper server. Thus taking you to the server you inputted prior.
+
+```bash
+[21:30:12 INFO]: [connected player] ondrya (/127.0.0.1:59292) has connected
+[21:30:12 INFO]: [server connection] ondrya -> lobby has connected
+[21:30:19 INFO]: [connected player] ondrya (/127.0.0.1:59292) has disconnected
+[21:30:19 INFO]: [server connection] ondrya -> lobby has disconnected
+```
+
+<Callout type="warn" title="Troubleshooting">
+  If you receive an error called <b>This server requires you to connect with Velocity.</b>, make sure that you have offline-mode set properly on your backend 
+  servers and your forwarding secret is correct. Should you need further assistance, you can submit a ticket for one of our staff to review your setup.
+</Callout>

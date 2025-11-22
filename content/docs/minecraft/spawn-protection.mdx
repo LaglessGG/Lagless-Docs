@@ -1,0 +1,37 @@
+---
+title: Spawn Protection
+description: Spawn protection prevents players from building around world spawn, undoing any attempts at placing or breaking blocks.
+---
+
+## Introduction
+
+Spawn protection only exists in dedicated servers and does not apply in singleplayer worlds or LAN worlds. Spawn protection only applies in the Overworld, since the world spawn is always in the Overworld.
+Spawn protection may be a useful feature for servers to prevent players from griefing the spawn area. You may want to disable it or change its range for a private server or a specific world design.
+
+## Spawn-Protection
+
+<Callout type="warn">
+  If there are no op(erators) at all in the server, spawn protection does not apply.
+</Callout>
+
+<Steps>
+    <Step>
+	Login to our lagless game panel
+	</Step>
+    <Step>
+	Go to the files tab and search for the **server.properties** file.
+	</Step>
+    <Step>
+	Search for the field 
+	`spawn-protection=16`
+	</Step>
+    <Step>
+	Setting this field to `0` will disable spawn protection. 
+	Setting it higher than 16 will increase the spawn protection range around the world spawn block. 
+	</Step>
+	<Step>
+    Save the file and restart your server for the changes to take effect.
+	</Step>
+</Steps>
+
+![Spawn Protection](/images/minecraft/spawnprotection.gif)

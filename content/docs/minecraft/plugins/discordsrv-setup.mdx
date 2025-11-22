@@ -1,0 +1,187 @@
+---
+title: DiscordSRV
+description: How to install and configure DiscordSRV to connect your Minecraft server with Discord.
+---
+
+## Introduction
+
+DiscordSRV is a popular plugin that bridges your Minecraft server chat with a Discord channel. Players can chat between Minecraft and Discord, and you can set up various notifications and integrations.
+
+## Prerequisites
+
+- Access to the [Lagless Panel](https://panel.lagless.gg)
+- A Minecraft server running Spigot, Paper, or similar
+- A Discord server where you have admin permissions
+- Basic understanding of Discord bot creation
+
+## Installation Process
+
+### Installing the Plugin
+
+Watch this video to see the basic installation process on the Lagless panel:
+
+<video controls width="100%">
+  <source src="/videos/discordsrv-install.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+### Manual Installation Steps
+
+If you prefer step-by-step instructions:
+
+1. **Download DiscordSRV**
+   - Go to the [DiscordSRV releases page](https://github.com/DiscordSRV/DiscordSRV/releases)
+   - Download the latest `.jar` file
+
+2. **Upload to Your Server**
+   - Log into the [Lagless Panel](https://panel.lagless.gg)
+   - Navigate to your server and go to the **Files** tab
+   - Open the `plugins` folder
+   - Upload the DiscordSRV `.jar` file
+
+3. **Restart Your Server**
+   - Stop your server if it's running
+   - Start it back up to generate the configuration files
+
+## Discord Bot Setup
+
+### Creating a Discord Bot
+
+1. **Create the Application**
+   - Go to the [Discord Developer Portal](https://discord.com/developers/applications)
+   - Click "New Application" and give it a name
+   - Go to the "Bot" section on the left
+
+2. **Configure Bot Settings**
+   - Click "Add Bot" if there isn't one already
+   - Under "Privileged Gateway Intents", enable:
+     - **Server Members Intent**
+     - **Message Content Intent**
+   - Copy the bot token (you'll need this later)
+
+3. **Invite Bot to Your Server**
+   - Go to the "OAuth2" > "URL Generator" section
+   - Select these scopes: `bot` and `applications.commands`
+   - Select these bot permissions:
+     - View Channels
+     - Send Messages
+     - Read Message History
+     - Add Reactions
+     - Use Slash Commands
+     - Manage Messages
+     - Embed Links
+   - Copy the generated URL and open it to invite the bot
+
+## Plugin Configuration
+
+### Basic Config Setup
+
+1. **Stop Your Server** (if running)
+
+2. **Edit the Config**
+   - In the Lagless Panel, go to **Files** > `plugins` > `DiscordSRV`
+   - Open `config.yml`
+
+3. **Add Your Bot Token**
+   Find this line and replace `BOTTOKEN` with your actual bot token:
+   ```yaml
+   BotToken: "BOTTOKEN"
+   ```
+
+4. **Set Your Channel ID**
+   - In Discord, right-click your desired channel and "Copy ID"
+   - Find this section and replace the channel ID:
+   ```yaml
+   Channels: {"global": "000000000000000000"}
+   ```
+
+### Getting Discord Channel IDs
+
+<Callout type="info">
+To copy Discord channel IDs, you need Developer Mode enabled in Discord. Go to User Settings > Advanced > Developer Mode and turn it on.
+</Callout>
+
+1. Right-click the channel you want to use
+2. Select "Copy ID"
+3. Paste this ID in your DiscordSRV config
+
+### Important Config Options
+
+Here are some key settings you might want to adjust:
+
+```yaml
+# Allow Discord users to run commands
+DiscordChatChannelAllowedCommands: ["say", "me"]
+
+# Require players to link their accounts
+RequireLinkedAccount: false
+
+# Format for messages from Discord to Minecraft
+DiscordToMinecraftChatMessageFormat: "&b[Discord] %name%&r: %message%"
+
+# Format for messages from Minecraft to Discord
+MinecraftChatToDiscordMessageFormat: "**%displayname%**: %message%"
+```
+
+## Testing the Setup
+
+1. **Start Your Server**
+   - After saving your config changes, start the server
+
+2. **Check the Console**
+   - Look for DiscordSRV connection messages
+   - You should see "DiscordSRV has connected to Discord"
+
+3. **Test Chat Integration**
+   - Send a message in your Minecraft server
+   - It should appear in your Discord channel
+   - Send a message in Discord and it should appear in Minecraft
+
+## Common Issues
+
+### Bot Won't Connect
+
+- Double-check your bot token is correct
+- Make sure the bot has proper permissions
+- Verify the bot is in your Discord server
+
+### Messages Not Syncing
+
+- Confirm your channel ID is correct
+- Check that the bot can read/send messages in that channel
+- Make sure you've restarted the server after config changes
+
+### Permission Errors
+
+- Ensure your Discord bot has the required permissions
+- Check that the channel isn't restricted to certain roles
+
+## Advanced Features
+
+### Account Linking
+
+Players can link their Minecraft and Discord accounts using:
+```
+/discord link
+```
+
+This will provide them with a code to DM to the bot for verification.
+
+### Console Integration
+
+You can set up console command integration to run Minecraft commands from Discord. Edit these sections in your config:
+
+```yaml
+DiscordConsoleChannelId: "000000000000000000"
+DiscordConsoleChannelUsageLog: true
+```
+
+### Custom Messages
+
+DiscordSRV supports custom messages for join/leave events, deaths, achievements, and more. Check the `messages.yml` file for all available options.
+
+## Conclusion
+
+DiscordSRV is a powerful way to connect your Minecraft community with Discord. Once set up properly, it creates a seamless chat experience between platforms and can help grow your server community.
+
+For more advanced configuration options, check the [official DiscordSRV documentation](https://docs.discordsrv.com/). 

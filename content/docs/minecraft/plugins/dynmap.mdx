@@ -1,0 +1,157 @@
+---
+title: Dynmap
+description: 2D Map for your server
+---
+
+# Installing via Panel
+
+Your server will already need to be running some sort of Spigot/Bukkit. For this example, I'll be using Paper.
+
+Under <b>Plugins</b>, search for Dynmap and install the version based on your Minecraft version.
+
+![install-mod](/images/minecraft/dynmap/install-plugin.png)
+
+Your console output may be different from mine but you want to ensure you see this from Dynmap
+
+```bash
+[03:36:09 INFO]: [dynmap] Enabling dynmap v3.7-SNAPSHOT-968
+[03:36:09 INFO]: [dynmap] Added 21 custom biome mappings
+[03:36:09 INFO]: [dynmap] Using Bukkit Permissions (superperms) for access control
+[03:36:09 INFO]: [dynmap] Web interface permissions only available for online users
+[03:36:09 INFO]: [dynmap] Extracted files upgraded
+[03:36:09 INFO]: [dynmap] Mod Support processing completed
+[03:36:10 INFO]: [dynmap] Loaded 27 shaders.
+[03:36:10 INFO]: [dynmap] Loaded 83 perspectives.
+[03:36:10 INFO]: [dynmap] Loaded 22 lightings.
+[03:36:10 INFO]: [dynmap] Starting enter/exit processing
+[03:36:10 INFO]: [dynmap] Finish marker initialization
+[03:36:10 INFO]: [dynmap] Web server started on address 0.0.0.0:8123
+[03:36:10 INFO]: [dynmap] version 3.7-SNAPSHOT-968 is enabled - core version 3.7-SNAPSHOT-985
+[03:36:10 INFO]: [dynmap] For support, visit our Discord at https://discord.gg/s3rd5qn
+[03:36:10 INFO]: [dynmap] For news, visit https://reddit.com/r/Dynmap or follow https://universeodon.com/@dynmap
+[03:36:10 INFO]: [dynmap] To report or track bugs, visit https://github.com/webbukkit/dynmap/issues
+[03:36:10 INFO]: [dynmap] If you'd like to donate, please visit https://www.patreon.com/dynmap or https://ko-fi.com/michaelprimm
+[03:36:10 INFO]: [dynmap] Loaded 3 maps of world 'world'.
+[03:36:10 INFO]: [dynmap] Loaded 2 maps of world 'world_nether'.
+[03:36:10 INFO]: [dynmap] Loaded 2 maps of world 'world_the_end'.
+[03:36:10 INFO]: [dynmap] Enabled
+```
+
+From here, you want to allocate the proper port. Under <b>Network</b>, create another allocation.
+Do not hit <b>Make Primary</b>
+
+![allocation](/images/allocations/page.png)
+
+In this case, we are going to use `50127` as our port for Dynmap. You can add that to your notes to reference in case you forget.
+
+Go to <b>Files</b> and update the config file to Dynmap to match this port. The simpliest way to find the word is by filtering the config string (Contrl + F/Command + F)
+
+![change-port](/images/minecraft/dynmap/change-port.png)
+
+# Choosing Database Storage
+
+By default, Dynmap will store your maps to render as files. You have the option to use SQLite, MySQL or S3. 
+
+### SQLite
+
+To use SQLite, comment `type: filetree` and uncomment `type: sqlite` as you see below.
+
+```yaml
+storage:
+  # Filetree storage (standard tree of image files for maps)
+  #type: filetree
+  # SQLite db for map storage (uses dbfile as storage location)
+  type: sqlite
+  dbfile: dynmap.db
+```
+If you leave `dbfile` set to `dynmap.db` as seen above, this means Dynmap will save your database to `/home/container/dynmap.db`.
+By default, you can leave it here unless you'd like to move it. 
+
+### MySQL / MariaDB
+
+Lagless allows you to create databases for your servers. Click on <b>Databases</b> on the left then <b>New Database</b>
+
+![new-db](/images/database/create.png)
+
+You can name your database anything but to be consistent, I'll name it `dynmap`. You also need to set up <b>Connection From</b> which I'll leave blank.
+This will allow connections from anywhere so be careful and make sure you don't leak the credentials.
+
+On the database that you created, you also have the options to preview the database address, username and size. To reveal the password, click on the eye icon.
+
+![preview](/images/database/preview.png)
+
+Once you click on the eye icon, it'll reveal your password which you'll use to plug in the configuration.
+
+![db-details](/images/database/details.png)
+
+Copy your information over and your config should look like this.
+
+```yaml
+storage:
+  # Filetree storage (standard tree of image files for maps)
+  #type: filetree
+  # SQLite db for map storage (uses dbfile as storage location)
+  #type: sqlite
+  #dbfile: dynmap.db
+  # MySQL DB for map storage (at 'hostname':'port' with flags "flags" in database 'database' using user 'userid' password 'password' and table prefix 'prefix')
+  type: mysql
+  hostname: 9.sentinel.cov.lagless.gg
+  port: 3306
+  database: s327_dynmap
+  userid: u327_2nb8yLL3Xb
+  password: 9f!3S0WjAh2=wmZQUWu+Gs.2
+  prefix: ""
+  flags: "?allowReconnect=true&autoReconnect=true"
+```
+
+Start your server and go back to your Console. Make sure you aren't seeing any errors and it says Connected to MySQL. Your output will look something similar to this.
+
+```bash
+[05:04:44 INFO]: [dynmap] Opening MySQL database 9.sentinel.cov.lagless.gg:3306/s327_dynmap as map store
+[05:04:45 INFO]: [dynmap] Connected to MySQL v5.5
+[05:04:45 INFO]: [dynmap] Initializing database schema
+[05:04:47 INFO]: [dynmap] Schema version = 6
+[05:04:47 INFO]: [dynmap] Mod Support processing completed
+[05:04:48 INFO]: [dynmap] Loaded 27 shaders.
+[05:04:48 INFO]: [dynmap] Loaded 83 perspectives.
+[05:04:48 INFO]: [dynmap] Loaded 22 lightings.
+[05:04:48 INFO]: [dynmap] Starting enter/exit processing
+[05:04:48 INFO]: [dynmap] Web server started on address 0.0.0.0:50127
+```
+
+# View your Map
+
+Now, you'll want to try connecting to your dynmap instance. Under your allocation, grab the IP and port and piece them together.
+
+![allocation-zoomed](/images/allocations/zoomed.png)
+
+As an example, yours should look like this
+
+- http://23.129.100.68:50127
+
+# Using your own domain
+
+If you have your own domain you want to use it. So we (for example) don't get 23.129.100.68:50127 but http://map.nivalora.com:50127/ or even better, http://map.nivalora.com
+
+## Using DNS records
+
+To achieve http://map.yourdomain.com:50127/ as a map link.  
+We have to point an "A" record towards the IP of your Minecraft server. In this example we have been using 23.129.100.68, so we will keep doing so.  
+
+* Go to your domain provider, and search for the DNS records. This may be slightly different than out example.  
+* Create a new "A record"  
+* Name it "Map" (or otherwise desired)  
+* Point it towards your IP, 23.129.100.68  
+
+It should look something like this.
+
+![Dynmap_A_record](/images/minecraft/dynmap/Dynmap_A_record.png)
+
+Because we now have this, we can connect to http://map.nivalora.com:50127/
+
+![Dynmap_A_record](/images/minecraft/dynmap/dynmap_browser.png)
+
+## Reverse Proxy
+
+Currently lagless is working on getting reverse proxy implemented.  
+When this is implemented, we can create this http://map.nivalora.com. So we no longer need the port.

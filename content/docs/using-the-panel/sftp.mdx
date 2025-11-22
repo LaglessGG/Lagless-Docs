@@ -1,0 +1,103 @@
+---
+title: Logging into SFTP
+description: A quick guide on how to login via SFTP
+---
+## Introduction
+
+This guide will help you login to your server and access it's files from your computer.
+
+## Prerequisites
+
+- An account on the [Lagless Panel](https://panel.lagless.gg).
+
+## Steps to logging into SFTP
+
+### Using [WinSCP](https://winscp.net/eng/download.php)
+
+You will need [WinSCP](https://winscp.net/eng/download.php) for this tutorial, this is a Windows only SFTP application.
+
+#### 1. Getting the credentials for your server
+
+1. Go to the [Lagless Panel](https://panel.lagless.gg)
+2. Navigate to your server
+3. Click on the Settings tab
+4. Locate the SFTP Login credentials
+5. Copy the SFTP Address and Username
+
+**Note:** You can find your SFTP details under the Settings tab. If you need to reset your password, you can do it under your service on the billing panel at [my.lagless.gg](https://my.lagless.gg).
+
+#### 2. Adding the credentials to WinSCP
+
+1. Open WinSCP
+2. Add a new site with the following details:
+   - **Host name:** Your SFTP Address (e.g., `hydra.dal.lagless.gg`)
+   - **Port number:** `2022` (make sure to change this from the default)
+   - **Username:** As provided on the Settings Page (e.g., `lagless.9a761fa8`)
+   ![Sites](/images/sftp/winscp-sites.png)
+3. Enter your Lagless Panel password as the password for the new site
+4. Click Save and "Save Password" option, then click OK
+
+#### 3. Logging the server
+
+1. Press the Login Button
+2. Enter any credentials if it asks for them
+
+### Using [FileZilla](https://filezilla-project.org/download.php?type=client)
+
+You will need [FileZilla](https://filezilla-project.org/download.php?type=client) for this tutorial
+
+#### 1. Getting the credentials for your server
+
+1. Go to the [Lagless Panel](https://panel.lagless.gg)
+2. Navigate to your server
+3. Click on the Settings tab
+4. Locate the SFTP Login credentials
+5. Copy the SFTP Address and Username
+
+**Note:** You can find your SFTP details under the Settings tab. If you need to reset your password, you can do it under your service on the billing panel at [my.lagless.gg](https://my.lagless.gg).
+
+#### 2. Adding the credentials to FileZilla
+
+1. Open FileZilla
+2. Click the Site Manager icon
+   ![Site Manager](/images/sftp/filezilla-site-manager.png)
+3. Enter the following connection details:
+   - **Host:** Your SFTP Address (e.g., `hydra.dal.lagless.gg`)
+   - **Port:** `2022`
+   - **Protocol:** SFTP - SSH File Transfer Protocol
+   - **Username:** As provided on the Settings Page (e.g., `lagless.9a761fa8`)
+   - **Password:** Your Lagless Panel password
+   ![Site Manager Window](/images/sftp/filezilla-site-manager-window.png)
+4. Click the "Connect" button
+
+### Using [Cyberduck](https://cyberduck.io/download/)
+
+You will need [Cyberduck](https://cyberduck.io/download/) for this tutorial
+
+#### 1. Getting the credentials for your server
+
+1. Go to the [Lagless Panel](https://panel.lagless.gg)
+2. Navigate to your server
+3. Click on the Settings tab
+4. Locate the SFTP Login credentials
+5. Copy the SFTP Address and Username
+
+**Note:** You can find your SFTP details under the Settings tab. If you need to reset your password, you can do it under your service on the billing panel at [my.lagless.gg](https://my.lagless.gg).
+
+#### 2. Adding the credentials to Cyberduck
+
+1. Open Cyberduck
+2. Click the New Connection button
+   ![Cyberduck Window](/images/sftp/cyberduck-window.png)
+3. Configure the connection with the following details:
+   - Switch the dropdown from "FTP" to "SFTP (SSH File Transfer Protocol)"
+   - **Server:** Your SFTP Address (e.g., `hydra.dal.lagless.gg`)
+   - **Port:** `2022`
+   - **Username:** As provided on the Settings Page (e.g., `lagless.9a761fa8`)
+   - **Password:** Your Lagless Panel password
+   ![Cyberduck Connection Window](/images/sftp/cyberduck-connection-window.png)
+4. Click the "Connect" button
+
+## Conclusion
+
+By logging into the server with SFTP, you can upload folders, large files, and much more.

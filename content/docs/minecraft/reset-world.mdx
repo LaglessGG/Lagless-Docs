@@ -1,0 +1,43 @@
+---
+title: Reset World
+description: How to reset your worlds for a new adventure.
+---
+
+# Backing Up Data
+
+If you'd like to keep your world to restore at a later point, you can zip them and download via File Manager or SFTP.
+
+<Callout type="warn" title="Shutdown Server">
+Make sure to shut down your server prior to archiving and downloading your worlds. 
+This ensures you have the latest files before wiping everything clean.
+</Callout>
+
+## Zipping Files
+
+- On your server, select <b>Files</b> on the left.
+- Select the world folders (world, world_nether, world_the_end) and select <b>Archive</b>
+
+![select-worlds](/images/minecraft/select-worlds.png)
+
+Depending on your world size, you may need to wait a few minutes for the worlds to zip. 
+
+![post-archive](/images/minecraft/post-archive.png)
+
+# Downloading Archive
+
+Now, you can choose to download it directly from the browser or through an SFTP client (such as FileZilla or WinSCP).
+
+![download-archive](/images/minecraft/download-archive.png)
+
+Alternatively, you can connect via SFTP. Your SFTP details can be found under the <b>File Manager</b> and picking <b>Launch SFTP</b> from the context menu.
+
+![sftp](/images/minecraft/launch-sftp.png)
+
+After you downloaded your files, you can delete the world folders and start your server as normal. Be aware that this may take a minute or two as it is generating a new spawn area.
+
+# Different World Names
+
+Depending on if you are using a custom modpack, your world folders may be named something different. To find the 
+proper name, go to <b>Files</b> and select your `server.properties` file. You're looking for the `level-name` line.
+
+![level-name](/images/minecraft/level-name.png)

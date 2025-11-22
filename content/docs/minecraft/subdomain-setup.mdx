@@ -1,0 +1,66 @@
+---
+title: Subdomain Setup
+description: How to use your own domain for Minecraft
+---
+
+# Lagless.Games Subdomain
+
+Lagless.gg has a built-in feature to use one of our subdomains free of charge. Under the <b>Network</b> tab, you can 
+select <b>Create Subdomain</b> and pick a custom name tying it to an allocation.
+
+![subdomain](/images/subdomain/main.png)
+![subdomain-add](/images/subdomain/add.png)
+
+Afterwards, you can see the subdomain you created along with what allocation it's tied to. You can always go back and delete or modify the records later on.
+
+![subdomain-summary](/images/subdomain/summary.png)
+
+# Adding DNS records
+
+Go to your registrar's website to manage your domain and find your DNS settings.
+
+## Dedicated Port
+
+If you have purchased a dedicated port for your Minecraft server (25565 or 19132), you will only need an A record.
+
+Create an <b>A record</b> with the subdomain you want and put the IPv4 address of your server. You can find the server IP 
+under the Network Tab on your server.
+
+![serverip](/images/minecraft/serverip.png)
+
+In this case, we're using Cloudflare but it should look something similar to this. If you are using Cloudflare as well, 
+make sure you disable <b>Proxy Status</b> and save.
+
+![cloudflare-dns](/images/minecraft/cloudflare-dns.png)
+
+## Non-Dedicated Port
+
+Using a shared IP means you'll need to add an extra SRV record. Make sure to still add an A record as shown above.
+
+At the end, it should look similar to this. 
+
+![ccloudflare-srv](/images/minecraft/cloudflare-srv.png)
+
+### Cloudflare
+- Name: `_minecraft._tcp`
+- Priority: `0`
+- Weight: `0`
+- TTL: `Auto` or `30 mins`
+- Port: Your port under Network
+- Target: The A record you created
+
+### Namecheap/Other Registrars
+
+- Service: `_minecraft`
+- Protocol: `_tcp`
+- Priority: `0`
+- Weight: `0`
+- TTL: `Auto` or `30 mins`
+- Port: Your port under Network
+- Target: The A record you created
+
+# Verifying DNS record
+
+Depending on your DNS, it may take up to 24-72 hours for the DNS to propagate. You can also try to 
+put the IP directly into Minecraft to see if you can resolve it. Alternatively, you can use mcsrvstat.us to check 
+if its resolvable.

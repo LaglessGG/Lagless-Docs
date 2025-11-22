@@ -1,0 +1,148 @@
+---
+title: Server Properties
+description: Configure and understand Minecraft's server.properties change max players, MOTD, world type and seed, render distance, gamemode, and performance-related options.
+---
+
+# Minecraft Server Properties
+
+This guide walks through the most commonly changed settings in `server.properties` for Minecraft servers hosted on Lagless. We'll cover how to change max players, world type, seed, render distance, `motd`, `level-type`, and a few other useful properties.
+
+## Accessing server.properties
+
+<Steps>
+<Step>
+Open your server panel and click <b>File Manager</b>
+</Step>
+<Step>
+Navigate to the server root and locate `server.properties`
+</Step>
+<Step>
+Click <b>Edit</b> to open the file in the panel editor
+</Step>
+<Step>
+Make your changes and <b>Save</b> the file
+</Step>
+<Step>
+Restart the server for changes to take effect
+</Step>
+</Steps>
+
+## Common Properties
+
+### max-players
+
+Controls the maximum number of concurrent players allowed on the server.
+
+Example:
+```
+max-players=20
+```
+
+- Increase this if you expect more players, but ensure the server has enough resources. Lowering it can help reduce load.
+
+### motd
+
+The message-of-the-day shown in the server list.
+
+Example:
+```
+motd=Welcome to our Lagless Server!
+```
+
+Tips:
+- Keep it short and descriptive
+- Avoid special characters that the client might not render
+
+### level-type
+
+Controls the world generator type. Common values:
+- `default` — Standard world
+- `flat` — Superflat
+- `largeBiomes` — Larger biomes
+- `amplified` — Amplified terrain
+
+Example:
+```
+level-type=default
+```
+
+### level-seed
+
+Sets the world seed used by the world generator. Use this to reproduce a specific world.
+
+Example:
+```
+level-seed=1234567890
+```
+
+Tips:
+- Seeds can be strings or numbers
+- If empty, a random seed will be generated on world creation
+
+### view-distance (render distance)
+
+Controls how many chunks away the server will send to players. Higher values increase visibility but add CPU/memory and network cost.
+
+Example:
+```
+view-distance=10
+```
+
+Recommendations:
+- For small servers (up to 10 players): `8-10`
+- For larger servers: monitor performance and adjust accordingly
+
+### difficulty
+
+Sets the game difficulty. Options: `peaceful`, `easy`, `normal`, `hard`.
+
+Example:
+```
+difficulty=normal
+```
+
+### gamemode
+
+Sets the default game mode for new players. Options: `survival`, `creative`, `adventure`, `spectator`.
+
+Example:
+```
+gamemode=survival
+```
+
+### allow-flight
+
+Allows players to fly (useful for mods/plugins or creative play). Set to `true` or `false`.
+
+Example:
+```
+allow-flight=false
+```
+
+### spawn-protection
+
+Protects an area around the spawn point from build/destroy actions by non-ops.
+
+Example:
+```
+spawn-protection=16
+```
+
+### enable-command-block
+
+Enable command blocks on the server. Set to `true` or `false`.
+
+Example:
+```
+enable-command-block=false
+```
+
+## Advanced Options
+
+- `max-tick-time` — Controls watchdog settings for server stalls
+- `resource-pack` / `resource-pack-sha1` — Force a resource pack on players
+- `query.port` and `query.enable` — Enable server query
+
+<Callout type="info" title="Advanced Settings">
+Only change advanced options if you understand the impact — incorrect values may make the server unstable.
+</Callout>

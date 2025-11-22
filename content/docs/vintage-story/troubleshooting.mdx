@@ -1,0 +1,309 @@
+---
+title: Troubleshooting
+description: Common issues and solutions for Vintage Story servers
+---
+
+# Vintage Story Troubleshooting Guide
+
+This guide covers common issues you may encounter with your Vintage Story server and provides step-by-step solutions.
+
+## Server Configuration Errors
+
+### JSON Parsing Errors
+
+If you encounter errors like:
+```
+Failed to read serverconfig.json
+Exception: After parsing a value an unexpected character was encountered: ". Path 'WorldConfig.WorldConfiguration', line 193, position 4.
+```
+
+**Common Causes:**
+- Extra commas in JSON
+- Missing quotes around values
+- Incorrect bracket placement
+- Invalid characters
+
+**Solutions:**
+1. **Validate JSON syntax** - Use an online JSON validator
+2. **Check for extra commas** - Remove trailing commas
+3. **Verify quotes** - Ensure all strings are properly quoted
+4. **Restore backup** - Use a known working configuration
+
+### Configuration Best Practices
+
+<Callout type="info">
+Always backup your `serverconfig.json` before making changes!
+</Callout>
+
+## Performance Issues
+
+### Server Overload Warnings
+
+**Warning Message:**
+```
+Server overloaded. A tick took 793ms to complete.
+```
+
+### When This Is Normal
+
+**During server startup:**
+- ✅ World generation process
+- ✅ Mod loading and initialization
+- ✅ Asset loading
+- ✅ Initial chunk generation
+
+**Expected Duration:** 2-10 minutes depending on world size and mods
+
+### When to Be Concerned
+
+**During regular gameplay:**
+- ❌ Persistent warnings after startup
+- ❌ Warnings every few seconds
+- ❌ Player lag and disconnections
+- ❌ Slow response to commands
+
+### Performance Solutions
+
+#### Memory Optimization
+
+**Increase server RAM:**
+- Small servers (1-4 players): 2-4GB
+- Medium servers (5-8 players): 4-6GB
+- Large servers (9+ players): 6GB+
+
+#### Server Settings
+
+Optimize in `serverconfig.json`:
+
+```json
+{
+  "TickTime": 50,
+  "MaxChunkRadius": 8,
+  "MaxConcurrentSaves": 2,
+  "SaveInterval": 300
+}
+```
+
+#### Mod Optimization
+
+- **Remove unnecessary mods** - Reduce server load
+- **Check mod compatibility** - Some mods conflict
+- **Update mods** - Newer versions often perform better
+- **Monitor resource usage** - Identify heavy mods
+
+## Connection Issues
+
+### Players Can't Connect
+
+#### Version Mismatch
+
+**Check server version:**
+1. Join your server
+2. Run command: `/info created version`
+3. Compare with client version
+
+**Fix version issues:**
+1. Navigate to server **Settings**
+2. Change version number
+3. Click **"Re-install"**
+4. Wait for installation to complete
+
+#### Server Status
+
+**Verify server is running:**
+- Check control panel status
+- Look for "Server started" in console
+- Test connection from different clients
+
+#### Firewall/Port Issues
+
+**Check connectivity:**
+- Verify server ports are open
+- Test from different networks
+- Check DDoS protection settings
+
+### Frequent Disconnections
+
+**Common causes:**
+- Network instability
+- Server overload
+- Memory issues
+- Mod conflicts
+
+**Solutions:**
+- Increase server resources
+- Check network stability
+- Review server logs for errors
+- Remove problematic mods
+
+## Startup Issues
+
+### Server Won't Start
+
+#### Memory Issues
+
+**Error signs:**
+- OutOfMemory exceptions
+- Startup crashes
+- Slow initialization
+
+**Solutions:**
+- Increase allocated RAM
+- Reduce world size
+- Remove heavy mods
+- Clear temporary files
+
+#### File Corruption
+
+**Symptoms:**
+- Missing file errors
+- Corrupted world data
+- Invalid configuration
+
+**Recovery:**
+- Restore from backup
+- Verify file integrity
+- Re-download server files
+- Regenerate world if necessary
+
+### Slow Startup
+
+**Optimization tips:**
+1. **Pre-generate chunks** - Reduce initial load
+2. **Limit mods** - Remove unnecessary ones
+3. **SSD storage** - Faster file access
+4. **More RAM** - Reduce disk swapping
+
+## World Generation Issues
+
+### Missing Modded Content
+
+**Problem:** Mods installed but content not appearing in world
+
+**Solution:**
+1. **Install mods BEFORE world generation**
+2. **Delete existing world data**
+3. **Restart server to generate new world**
+4. **Verify mods are loading correctly**
+
+### Corrupted World
+
+**Symptoms:**
+- Strange terrain generation
+- Missing chunks
+- Player spawn issues
+
+**Recovery:**
+1. **Restore world backup** - If available
+2. **Regenerate world** - Delete world folder
+3. **Check mod compatibility** - Remove conflicting mods
+
+## Mod-Related Issues
+
+### Mods Not Loading
+
+**Checklist:**
+- ✅ Files in `/VintagestoryData/Mods/` directory
+- ✅ Server restarted after installation
+- ✅ Mods compatible with server version
+- ✅ No file permission issues
+
+### Mod Conflicts
+
+**Identifying conflicts:**
+1. Check server logs for errors
+2. Remove mods one by one
+3. Test server stability
+4. Document problematic combinations
+
+**Prevention:**
+- Research mod compatibility
+- Install mods gradually
+- Keep detailed mod lists
+- Regular backups before changes
+
+## Log Analysis
+
+### Reading Server Logs
+
+**Key locations:**
+- Server console output
+- Log files in server directory
+- Error logs in panel
+
+**Important log entries:**
+- Startup sequence
+- Error messages
+- Performance warnings
+- Mod loading status
+
+### Common Error Patterns
+
+**Memory errors:**
+```
+OutOfMemoryException
+GC overhead limit exceeded
+```
+
+**Mod errors:**
+```
+Failed to load mod: [ModName]
+Mod compatibility issue
+```
+
+**Configuration errors:**
+```
+Invalid configuration value
+JSON parsing error
+```
+
+## Getting Help
+
+### Information to Gather
+
+Before contacting support:
+
+1. **Server logs** - Copy relevant error messages
+2. **Support ID** - Found in your panel
+3. **Mod list** - Document installed mods
+4. **Steps to reproduce** - How the issue occurs
+5. **Server specifications** - RAM, CPU, storage
+
+### Contact Options
+
+**Discord Support:**
+- Join the Lagless Discord
+- Mention your Support ID
+- Provide detailed information
+
+**Support Ticket:**
+- Open ticket through panel
+- Include all relevant details
+- Attach log files if requested
+
+### Self-Help Resources
+
+- [Official Vintage Story Wiki](https://wiki.vintagestory.at/)
+- [Community Forums](https://www.vintagestory.at/forums/)
+- [Modding Discord](https://discord.gg/vintagestory)
+- Server console logs and error messages
+
+## Preventive Measures
+
+### Regular Maintenance
+
+1. **Schedule restarts** - Daily server restarts
+2. **Monitor performance** - Check resource usage
+3. **Update regularly** - Keep mods and server updated
+4. **Backup frequently** - Automated backup schedules
+
+### Best Practices
+
+1. **Test changes** - Use development server first
+2. **Document configurations** - Keep notes on settings
+3. **Monitor logs** - Regular log review
+4. **Plan updates** - Schedule maintenance windows
+
+<Callout type="info">
+Most issues can be prevented with regular maintenance and careful change management. Always backup before making significant changes!
+</Callout>
