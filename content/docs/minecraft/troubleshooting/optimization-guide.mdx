@@ -1,0 +1,195 @@
+---
+title: Minecraft server optimization guide
+description: Unable to Access Jarfile? this is how you fix it.
+---
+
+## Introduction
+
+Work in Progress article. This will be updated over time.
+
+<Callout type="info" title="Before you start">
+    Before you start, make a backup first before making changes.
+</Callout>
+
+Do you have a Minecraft server but your playerbase complains about lag, low TPS? chunks loading slow? and general bad performance? then this article may be for you.  
+In this guide, we're going over a great many things to optimize your server. Use the Table of content(TOC) to quickly navigate.
+
+If you're using a fork of other software, also check the software it's forked from as they may still provide optimization settings.
+Even though many things are covered, not everything will or can be covered. Also, Individual version may have differences as well. So keep that in mind.
+
+### Server Jarfile
+
+There are many versions of server software, each one doing something different, some great some not so much. Here are a few good options.
+
+| Server software| Description | Link |
+|-----------|-------------|-----------| 
+| Vanilla Minecraft | no mods, no plugins. | https://www.minecraft.net/en-us/download/server |
+| Spigot | Spigot allows plugins, not recommended and requires buildtools to download | https://www.spigotmc.org/ |
+| universespigot | allows some of the best performance, at a price. ($70 or monthly) | https://universespigot.com/ | 
+| Paper | The go to for many, fairly well optimised | https://papermc.io/ |
+| Folia | Folia is a  fork of Paper that adds multithreading to the server for high playercounts, but breaks most plugins | https://papermc.io/software/folia/ |
+| Purpur | drop in replacement for paper adding new gameplay features | https://purpurmc.org/#projects |
+| Forge| Modding software that's widely known | https://files.minecraftforge.net/net/minecraftforge/forge/ |
+| Fabric| Fast modding software | https://fabricmc.net/ |
+| NeoForge | Fork of forge with a community focussed API | https://neoforged.net/ |
+
+There are many other forks, but these are some of the most known ones.
+
+Recommended:
+[Paper](https://papermc.io/) - The most popular fork that aims to improve performance while fixing gameplay and mechanics inconsistencies.
+[Purpur](https://purpurmc.org/#projects) - Paper fork focused on features, great for SMP's.
+
+For modded go by the modpack you wish to use.
+
+### General optimisation
+
+If you are using vanilla, Fabric or Spigot (or anything below Paper) , go to your `server.properties` and make sure you have `sync-chunk-writes=false`. 
+Many forks already have this set to false. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
+
+#### server.properties`
+
+Most values here don't need to be changed for optimization.
+
+`network-compression-threshold=256` if you got plenty of bandwith, but need more CPU resources you could up the value. `512` is a pretty good number if you want to go up.
+`entity-broadcast-range-percentage=100` not something that would help a server a lot, but clients may get a few more FPS due to entity numbers visible.
+
+`view-distance` this is how far you can see chunks in the world, higher number means more stress on a server. Lower to get better performance.  A value between 6-10 is recommended.
+`simulation-distance` This is the distance things will "tick". This includes crops growing, smelters burning and entities moving. Keep this lower than `view-distance`. Typically about at about 50%
+
+#### Map pregen
+
+Pre-generating, AKA pregen, is highly recommended to lag removal. Even though hardware has gotten a lot faster, this is still a recommended.
+
+If you want to pregen the world, you can use a plugin such as **Chunky** We have a guide [here](https://docs.lagless.gg/minecraft/plugins/chunky). 
+This can use a lot of storage space, so don't go overboard. A site like [world size calculator](https://onlinemo.de/world) may give you a estimate of that. The difference between 10k and 20k is about 50GB storage.
+
+### Purpur
+
+#### purpur.yml
+
+`use-alternate-keepalive: false` the default  is fine. However, If you have players being timed out this may help as it does not kick players unless they have not responded to the server for 30 seconds.
+
+### Spigot
+
+#### spigot.yml
+
+`view-distance: default` When set to default, the server reads the view-distance set in server.properties. This is best kept default to avoid confusion.
+`simulation-distance: default`  When set to default, the server reads the view-distance set in server.properties. This is best kept default to avoid confusion.
+`mob-spawn-range`  Lowering this value may give the sense of having more mobs because they spawn closer. Generally recommend to keep  close to your simulation range or lower. Never go above hard despawn range (16) as you would get stuck in a spawn/despawn loop, expect a crash.
+`entity-activation-range` ticking, aka "doing something" for entities is not that important the further away they are. Especially if you can't see them. Lowering this may help quite a bit.
+
+Good starting values
+
+```
+      animals: 16
+      monsters: 24
+      raiders: 48
+      misc: 8
+      water: 8
+      villagers: 16
+      flying-monsters: 48
+```
+
+` entity-tracking-range` when will entities be visible? this setting controls it. The recommended setting is below. Don't go to low unless you want to get jumpscares. Recommend to be kept above `entity-activation-range`.
+
+```
+      players: 48
+      animals: 48
+      monsters: 48
+      misc: 32
+      other: 64
+```
+`tick-inactive-villagers` Can be disabled for performance, but if you have a lot of farms you may see side affects.
+`nerf-spawner-mobs: false` setting this to true will disable their AI. Which means less ticking.
+
+### Paper
+
+#### paper-world-defaults.yml
+
+`delay-chunk-unloads-by: 10s` this setting will help with unloading chunks. Lower means fast unload, but may also mean the chunk has to be loaded more often. This comes down to each induvidual server. This is great for lobby servers that need to be loaded for a long time. Although permanent loading solutions may be desired.
+`prevent-moving-into-unloaded-chunks: false`  when `true` prevents players from moving into unloaded chunks, causing more main thread load.
+`entity-per-chunk-save-limit` the reasons for limiting are pretty obvious, some of these can even be used for lag machines.
+
+```
+    area_effect_cloud: 8
+    arrow: 16
+    breeze_wind_charge: 8
+    dragon_fireball: 3
+    egg: 8
+    ender_pearl: 8
+    experience_bottle: 3
+    experience_orb: 16
+    eye_of_ender: 8
+    fireball: 8
+    firework_rocket: 8
+    llama_spit: 3
+    splash_potion: 8
+    lingering_potion: 8
+    shulker_bullet: 8
+    small_fireball: 8
+    snowball: 8
+    spectral_arrow: 16
+    trident: 16
+    wind_charge: 8
+    wither_skull: 4
+```
+
+`despawn-ranges:` for most things you don't need the default hard despawn of 128. This will help a lot with performance and how many mobs are visible. Soft range not recommended to change.
+	
+```
+      ambient:
+        hard: 72
+        soft: 30
+      axolotls:
+        hard: 72
+        soft: 30
+      creature:
+        hard: 72
+        soft: 30
+      misc:
+        hard: 72
+        soft: 30
+      monster:
+        hard: 72
+        soft: 30
+      underground_water_creature:
+        hard: 72
+        soft: 30
+      water_ambient:
+        hard: 72
+        soft: 30
+      water_creature:
+        hard: 72
+        soft: 30
+```
+
+`per-player-mob-spawns: true` Have a lot of mob farms? often this hits the mobcap on servers, setting this setting to true may help with that as it checks for each player.
+
+
+### bukkit
+
+#### bukkit.yml
+
+`spawn-limits`  This is for the whole server, so you may want to increase this as the server get's more players. Less mobs less lag. But also with more players less visible mobs per players.  Also take a look at `per-player-mob-spawn` setting.
+
+```
+    monsters: 20
+    animals: 5
+    water-animals: 2
+    water-ambient: 2
+    water-underground-creature: 3
+    axolotls: 3
+    ambient: 1
+```
+
+The `ticks-per` Settings this higher will mean the server attempts to spawn a mob every x ticks, but that's okay for many mobs as they don't despawn fast. Below are some recommended starting points.
+
+```
+    monster-spawns: 10
+    animal-spawns: 400
+    water-spawns: 400
+    water-ambient-spawns: 400
+    water-underground-creature-spawns: 400
+    axolotl-spawns: 400
+    ambient-spawns: 400
+```
