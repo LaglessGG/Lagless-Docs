@@ -1,11 +1,18 @@
 ---
 title: Minecraft server optimization guide
-description: Unable to Access Jarfile? this is how you fix it.
+description: Comprehensive guide to optimize your Minecraft server performance, reduce lag, and improve TPS. Covers Paper, Purpur, Spigot configuration and best practices.
 ---
 
 ## Introduction
 
-Work in Progress article. This will be updated over time.
+This is a work in progress article. This will be updated over time.
+
+🚧 Coming Soon
+- JVM Argument Optimization Guide
+- Spark Profiler Setup & Usage  
+- Troubleshooting Common Issues
+
+This article is actively being expanded. Check back weekly for updates!
 
 <Callout type="info" title="Before you start">
     Before you start, make a backup first before making changes.
@@ -27,7 +34,7 @@ There are many versions of server software, each one doing something different, 
 | Spigot | Spigot allows plugins, not recommended and requires buildtools to download | https://www.spigotmc.org/ |
 | universespigot | allows some of the best performance, at a price. ($70 or monthly) | https://universespigot.com/ | 
 | Paper | The go to for many, fairly well optimised | https://papermc.io/ |
-| Folia | Folia is a  fork of Paper that adds multithreading to the server for high playercounts, but breaks most plugins | https://papermc.io/software/folia/ |
+| Folia | Folia is a  fork of Paper that adds multithreading to the server for high playercounts (100+), but breaks most plugins | https://papermc.io/software/folia/ |
 | Purpur | drop in replacement for paper adding new gameplay features | https://purpurmc.org/#projects |
 | Forge| Modding software that's widely known | https://files.minecraftforge.net/net/minecraftforge/forge/ |
 | Fabric| Fast modding software | https://fabricmc.net/ |
@@ -39,14 +46,12 @@ Recommended:
 [Paper](https://papermc.io/) - The most popular fork that aims to improve performance while fixing gameplay and mechanics inconsistencies.
 [Purpur](https://purpurmc.org/#projects) - Paper fork focused on features, great for SMP's.
 
-For modded go by the modpack you wish to use.
-
 ### General optimisation
 
 If you are using vanilla, Fabric or Spigot (or anything below Paper) , go to your `server.properties` and make sure you have `sync-chunk-writes=false`. 
 Many forks already have this set to false. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
 
-#### server.properties`
+#### server.properties
 
 Most values here don't need to be changed for optimization.
 
@@ -67,7 +72,7 @@ This can use a lot of storage space, so don't go overboard. A site like [world s
 
 #### purpur.yml
 
-`use-alternate-keepalive: false` the default  is fine. However, If you have players being timed out this may help as it does not kick players unless they have not responded to the server for 30 seconds.
+`use-alternate-keepalive: false` the default is false. However, If you have players being timed out this setting this to true may help as it does not kick players unless they have not responded to the server for 30 seconds.
 
 ### Spigot
 
