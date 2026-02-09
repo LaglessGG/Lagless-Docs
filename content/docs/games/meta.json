@@ -1,5 +1,5 @@
 {
   "title": "Other Games",
   "icon": "Folder",
-  "index": "index"
+  "root": true
 }
