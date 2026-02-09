@@ -1,5 +1,7 @@
 {
   "title": "Other Games",
   "icon": "Folder",
-  "index": "index"
+  "index": "index",
+  "sidebar": true,
+  "order": 2
 }
