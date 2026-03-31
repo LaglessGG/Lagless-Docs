@@ -1,0 +1,82 @@
+---
+title: Configuring SSH
+description: Learn how to securely configure SSH access on your VPS for enhanced security and peace of mind.
+---
+
+# Creating your key
+
+SSH (Secure Shell) is the standard protocol for securely accessing remote servers. Properly configuring SSH on your VPS is essential for maintaining security and preventing unauthorized access. This guide will walk you through setting up secure SSH access using key-based authentication and hardening your SSH server configuration.
+
+### On Your Local Machine
+
+1. Open your terminal and generate a new SSH key pair:
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+2. When prompted, accept the default location or specify a custom path.
+
+3. Optionally, add a passphrase for additional security.
+
+<Callout type="warn" title="Adding a Passphrase">
+By setting a passphrase, you have an additional layer of security on your ssh key however if you lose or forget your passphrase, you'll need to regenerate a new SSH key.
+</Callout>
+
+### Add your Public Key to VPS Panel
+
+Go to the directory you saved your SSH key to and copy the file ending in `.pub`. Make sure you copy your <bold>public key</bold>, not your private key. One way to confirm this is by looking at the end of your public key file, your comment should be at the very end.
+
+From your VPS Panel, select <strong>SSH Keys</strong> at the top then <strong>Add Key</strong>. Give your SSH key a name and paste the public key into the box then save.
+
+![Client panel services](/images/vps/vf-dash-ssh.png)
+
+## Adding SSH key manually (on your own)
+
+If you prefer not to use the panel or if you are working on an existing server, install the key directly into your account's `authorized_keys` file.
+
+### Method 1: Use `ssh-copy-id`
+
+1. Run this from your local machine:
+
+```bash
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@your-vps-ip
+```
+
+2. Enter your password when prompted.
+
+3. Verify login via key:
+
+```bash
+ssh user@your-vps-ip
+```
+
+### Method 2: Manual key deployment
+
+1. On your local computer, copy the public key content:
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+2. Connect to your VPS using password auth first:
+
+```bash
+ssh user@your-vps-ip
+```
+
+3. On the VPS, ensure the SSH directory exists and has correct permissions:
+
+```bash
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+```
+
+4. Append the public key to `authorized_keys`:
+
+```bash
+echo "<paste-your-public-key-here>" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+5. Test SSH login with key. After you ensure your key works, you can proceed to this next article on securing SSH on your machine.

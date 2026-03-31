@@ -1,0 +1,205 @@
+---
+title: Enable ICMP (Ping) on Windows Server
+description: How to enable ICMP echo requests on Windows Server using PowerShell and Command Prompt via Windows Firewall rules.
+---
+
+import { Step, Steps } from 'fumadocs-ui/components/steps';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+
+By default, Windows Server blocks ICMP echo requests (ping) on the Public network profile through Windows Defender Firewall. This guide shows you how to enable ICMP using either PowerShell or Command Prompt.
+
+<Callout type="warn">
+  Enabling ICMP on a public-facing interface may expose your server to network reconnaissance. Consider enabling it only on Domain or Private profiles if your server is internet-facing.
+</Callout>
+
+## Prerequisites
+
+- Administrator privileges on the Windows Server instance
+- Access to PowerShell or Command Prompt (run as Administrator)
+
+---
+
+## Enable ICMP
+
+<Tabs items={['PowerShell', 'Command Prompt']}>
+
+<Tab value="PowerShell">
+
+<Steps>
+
+<Step>
+
+### Open PowerShell as Administrator
+
+Right-click the **Start** menu and select **Windows PowerShell (Admin)** or **Terminal (Admin)**.
+
+</Step>
+
+<Step>
+
+### Enable ICMPv4 (Ping) inbound
+
+Run the following command to create a firewall rule that allows inbound ICMPv4 echo requests:
+
+```powershell
+New-NetFirewallRule `
+  -Name "Allow-ICMPv4-In" `
+  -DisplayName "Allow ICMPv4 Inbound" `
+  -Protocol ICMPv4 `
+  -IcmpType 8 `
+  -Direction Inbound `
+  -Action Allow `
+  -Profile Any `
+  -Enabled True
+```
+
+</Step>
+
+<Step>
+
+### (Optional) Enable ICMPv6
+
+If your environment uses IPv6, also run:
+
+```powershell
+New-NetFirewallRule `
+  -Name "Allow-ICMPv6-In" `
+  -DisplayName "Allow ICMPv6 Inbound" `
+  -Protocol ICMPv6 `
+  -IcmpType 128 `
+  -Direction Inbound `
+  -Action Allow `
+  -Profile Any `
+  -Enabled True
+```
+
+</Step>
+
+<Step>
+
+### Verify the rule was created
+
+```powershell
+Get-NetFirewallRule -Name "Allow-ICMPv4-In" | Select-Object Name, DisplayName, Enabled, Direction, Action
+```
+
+You should see `Enabled : True` in the output.
+
+</Step>
+
+</Steps>
+
+<Callout type="info">
+  To scope the rule to a specific network profile, replace `-Profile Any` with `-Profile Domain`, `-Profile Private`, or `-Profile Public`.
+</Callout>
+
+</Tab>
+
+<Tab value="Command Prompt">
+
+<Steps>
+
+<Step>
+
+### Open Command Prompt as Administrator
+
+Press `Win + R`, type `cmd`, then press `Ctrl + Shift + Enter` to launch as Administrator.
+
+</Step>
+
+<Step>
+
+### Enable ICMPv4 (Ping) inbound
+
+Run the following `netsh` command to add an inbound firewall rule for ICMPv4 echo requests:
+
+```cmd
+netsh advfirewall firewall add rule ^
+  name="Allow-ICMPv4-In" ^
+  protocol=icmpv4:8,any ^
+  dir=in ^
+  action=allow ^
+  enable=yes ^
+  profile=any
+```
+
+</Step>
+
+<Step>
+
+### (Optional) Enable ICMPv6
+
+```cmd
+netsh advfirewall firewall add rule ^
+  name="Allow-ICMPv6-In" ^
+  protocol=icmpv6:128,any ^
+  dir=in ^
+  action=allow ^
+  enable=yes ^
+  profile=any
+```
+
+</Step>
+
+<Step>
+
+### Verify the rule was created
+
+```cmd
+netsh advfirewall firewall show rule name="Allow-ICMPv4-In"
+```
+
+Confirm the rule appears with `Enabled: Yes` and `Action: Allow`.
+
+</Step>
+
+</Steps>
+
+<Callout type="info">
+  Replace `profile=any` with `profile=domain`, `profile=private`, or `profile=public` to restrict the rule to a specific network profile.
+</Callout>
+
+</Tab>
+
+</Tabs>
+
+---
+
+## Reverting the Change
+
+To remove the ICMP rules and restore the default blocked state:
+
+<Tabs items={['PowerShell', 'Command Prompt']}>
+
+<Tab value="PowerShell">
+
+```powershell
+Remove-NetFirewallRule -Name "Allow-ICMPv4-In"
+Remove-NetFirewallRule -Name "Allow-ICMPv6-In"
+```
+
+</Tab>
+
+<Tab value="Command Prompt">
+
+```cmd
+netsh advfirewall firewall delete rule name="Allow-ICMPv4-In"
+netsh advfirewall firewall delete rule name="Allow-ICMPv6-In"
+```
+
+</Tab>
+
+</Tabs>
+
+---
+
+## Testing Connectivity
+
+Once the rules are applied, test from another machine on the network:
+
+```bash
+ping <your-server-ip>
+```
+
+A successful response confirms ICMP is now enabled.
