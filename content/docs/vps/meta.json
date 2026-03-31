@@ -1,0 +1,9 @@
+{
+    "title": "Virtual Private Server",
+    "icon": "Computer",
+    "index": "index",
+    "pages": [
+        "ssh",
+        "windows-icmp"
+    ]
+}
