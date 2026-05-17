@@ -31,13 +31,8 @@ export const baseOptions: BaseLayoutProps = {
       active: 'url',
     },
     {
-      text: 'AI Assistant',
-      url: '/ai-help',
-      active: 'url',
-    },
-    {
       text: 'Game Servers',
-      url: '/server-setup',
+      url: 'https://lagless.gg/plans',
       active: 'url',
     },
     {
