@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(curl -sS -o /tmp/docs.html -w \"HTTP %{http_code}\\\\n\" http://localhost:3000/docs)",
+      "Read(//tmp/**)",
+      "PowerShell($src = \"c:/Users/anderson/Documents/Lagless-Docs/content/docs\"; $dst = \"c:/Users/anderson/Documents/lagless-website/src/content/docs\"; if \\(Test-Path $dst\\) { Remove-Item -Recurse -Force $dst }; Copy-Item -Recurse $src $dst; \\(Get-ChildItem -Recurse $dst | Measure-Object\\).Count)",
+      "PowerShell($srcRoot = \"c:/Users/anderson/Documents/Lagless-Docs/public\"; $dstRoot = \"c:/Users/anderson/Documents/lagless-website/public\"; foreach \\($folder in @\\(\"images\",\"docs\"\\)\\) { $s = Join-Path $srcRoot $folder; $d = Join-Path $dstRoot $folder; if \\(Test-Path $s\\) { robocopy $s $d /E /XO /NFL /NDL /NJH /NJS /NP | Out-Null; Write-Output \"copied: $folder\" } }; \"asset count: $\\(\\(Get-ChildItem -Recurse $dstRoot/images,$dstRoot/docs -File | Measure-Object\\).Count\\)\")",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; pnpm exec tsc --noEmit 2>&1 | Select-Object -First 40; \"exit=$LASTEXITCODE\")",
+      "Bash(curl -s -o /tmp/p.html -w '%{http_code}' http://localhost:3000__TRACKED_VAR__)",
+      "Bash(curl -s -o /tmp/sch.html -w \"HTTP %{http_code}\\\\n\" \"http://localhost:3000/docs/using-the-panel/schedule\")",
+      "Bash(curl -sI \"http://localhost:3000/images/schedules/Game_panel_login.png\")",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; pnpm exec tsc --noEmit 2>&1 | Select-Object -First 20; \"exit=$LASTEXITCODE\")",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; pnpm exec next build 2>&1 | Select-Object -Last 20; \"exit=$LASTEXITCODE\")",
+      "Bash(cd \"c:/Users/anderson/Documents/lagless-website\" && rm -rf \"src/app/docs/[[...slug]]\" && ls src/app/docs)",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; pnpm exec next build 2>&1 | Select-String \"docs|error|Error\" | Select-Object -First 25; \"exit=$LASTEXITCODE\")",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; pnpm exec next build 2>&1 | Select-String \"docs|error|Error|Failed\" | Select-Object -First 30; \"exit=$LASTEXITCODE\")",
+      "Bash(cd \"c:/Users/anderson/Documents\" && diff -rq Lagless-Docs/content/docs lagless-website/src/content/docs 2>&1 | head -40)",
+      "Read(//c/Users/anderson/Documents/**)",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; Remove-Item -Recurse -Force .next -ErrorAction SilentlyContinue; pnpm exec next build 2>&1 | Select-String -Pattern \"error|Error|Failed|docs/\\\\[\" -CaseSensitive:$false | Select-Object -First 30; \"exit=$LASTEXITCODE\")",
+      "PowerShell(Set-Location \"c:/Users/anderson/Documents/lagless-website\"; \\(pnpm exec next build 2>&1 | Out-String\\) -split \"`n\" | Where-Object { $_ -match \"/docs\" } | Select-Object -First 80)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\anderson\\Documents\\Lagless-Docs\\src\\app\\docs"
+    ]
+  }
+}
